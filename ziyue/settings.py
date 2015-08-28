@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -109,5 +110,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+# AWS S3
+AWS_STORAGE_BUCKET_NAME = 'ziyue'
+AWS_ACCESS_KEY_ID = 'AKIAI2DIWAMCXA4I5VJA'
+AWS_SECRET_ACCESS_KEY = '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'
+
+STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+MEDIA_ROOT = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/media/'
+MEDIA_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/media/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'

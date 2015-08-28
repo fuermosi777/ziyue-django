@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 class Category(models.Model):
 	name = models.CharField(max_length=30)
 	slug = models.CharField(max_length=30)
@@ -10,6 +9,13 @@ class Category(models.Model):
 
 class Vendor(models.Model):
 	name = models.CharField(max_length=30)
+    url = models.URLField()
+
+    def __str__(self):
+        return self.name
 
 class Post(models.Model):
 	title = models.TextField()
+
+    def __str__(self):
+        return self.title
