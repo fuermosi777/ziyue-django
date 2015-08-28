@@ -8,3 +8,5 @@
 *.pyc
 
 local.py
+
+__pycache__
