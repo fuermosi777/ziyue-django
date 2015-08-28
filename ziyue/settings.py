@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
+    'imagekit',
 )
 
 MIDDLEWARE_CLASSES = (
