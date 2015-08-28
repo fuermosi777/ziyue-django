@@ -30,7 +30,9 @@ except:
     DEBUG = False
 
 ALLOWED_HOSTS = [
-	'.ziyue.io',
+	'ec2-52-74-30-188.ap-southeast-1.compute.amazonaws.com',
+    '127.0.0.1',
+    'localhost',
 ]
 
 
