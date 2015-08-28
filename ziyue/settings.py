@@ -23,7 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ul@vi$!-cv+(%0c@@_c2j+!5bv-38#y)sh!o6!=b=1o1mnghlp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+try:
+    import local
+    DEBUG = True
+except:
+    DEBUG = False
 
 ALLOWED_HOSTS = [
 	'.ziyue.io',
@@ -82,7 +86,7 @@ DATABASES = {
          'NAME': 'ziyue_db',
          'USER': 'fuermosi777',
          'PASSWORD': 'lh14589123',
-         'HOST': '127.0.0.1',
+         'HOST': 'ziyue-db.clansbmy63wh.ap-southeast-1.rds.amazonaws.com',
          'PORT': '5432',
     }
 }
