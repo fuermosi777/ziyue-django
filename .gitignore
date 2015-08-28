@@ -10,3 +10,6 @@
 local.py
 
 __pycache__
+
+.sock
+*.sock
