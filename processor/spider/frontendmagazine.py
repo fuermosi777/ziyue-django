@@ -13,7 +13,6 @@ def crawl():
             'source': 'http://zhuanlan.zhihu.com%s'%d['url'],
             'feature': d['titleImage'],
         })
-    print res
     return res
 
 if __name__ == "__main__":
