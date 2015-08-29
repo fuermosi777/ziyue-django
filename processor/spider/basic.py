@@ -26,9 +26,13 @@ def std_rss_crawl(url):
     res = []
     fd = load_feed(url)
     for e in fd.entries:
+        if 'content' in e:
+            content = e.content[0].value
+        else:
+            content = e.description
         res.append({
             'title': e.title,
-            'body': e.content[0].value,
+            'body': content,
             'source': e.link,
             'datetime': datetime.fromtimestamp(mktime(e.published_parsed)),
         })
