@@ -8,15 +8,14 @@ def store(vendor, post):
         p = Post.objects.get(title=post['title'])
         print 'Post already exists %s'%post['title']
     except:
-        p = Post(title=post['title'], vendor=vendor, body=post['body'], source=post['source'])
+        p = Post(title=post['title'], vendor=vendor, body=post['body'], source=post['source'], datetime=post['datetime'])
         p.save()
-        if post['feature']:
+        if 'feature' in post:
             img_temp = NamedTemporaryFile(delete=True)
             img_temp.write(urllib2.urlopen(post['feature']).read())
             img_temp.flush()
 
             p.feature = File(img_temp)
             p.save()
-
 
         print 'New post added %s'%p.title

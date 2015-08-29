@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup as BS
 import feedparser
 import urllib2
 import json
+from time import mktime
+from datetime import datetime
 
 def load_soup(url):
     print 'start loading soup %s'%url
@@ -27,6 +29,7 @@ def std_rss_crawl(url):
         res.append({
             'title': e.title,
             'body': e.content[0].value,
-            'source': e.link
+            'source': e.link,
+            'datetime': datetime.fromtimestamp(mktime(e.published_parsed)),
         })
     return res

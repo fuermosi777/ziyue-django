@@ -1,4 +1,5 @@
 import basic
+from datetime import datetime
 
 def crawl():
     res = []
@@ -21,6 +22,7 @@ def get_post(url):
         'body': post['content'],
         'source': post['url'],
         'feature': post['pic'],
+        'datetime': datetime.fromtimestamp(int(post['dateline'])).strftime('%Y-%m-%d %H:%M:%S'),
     }
 
 if __name__ == "__main__":
