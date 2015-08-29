@@ -27,7 +27,7 @@ try:
     import local
     DEBUG = True
 except:
-    DEBUG = False
+    DEBUG = True
 
 ALLOWED_HOSTS = [
     '*',
