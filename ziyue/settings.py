@@ -134,3 +134,5 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 MEDIA_ROOT = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/media/'
 MEDIA_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/media/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+AWS_QUERYSTRING_AUTH = False
