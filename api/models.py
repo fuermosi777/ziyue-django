@@ -27,15 +27,9 @@ class Vendor(models.Model):
     def __str__(self):
         return self.name
 
-def post_feature_name(instance, filename):
-    ext = filename.split('.')[-1]
-    filename = "%s.%s" % (uuid.uuid4(), ext)
-    return os.path.join('media/post_feature', filename)
-
 @python_2_unicode_compatible
 class Post(models.Model):
     title = models.TextField()
-    feature = ProcessedImageField(upload_to=vendor_avatar_name, processors=[ResizeToFill(800, 600)], format='JPEG', options={'quality': 80}, blank=True)
     vendor = models.ForeignKey(Vendor)
     datetime = models.DateTimeField(auto_now=True)
     body = models.TextField()
@@ -43,3 +37,12 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+def post_image_name(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (uuid.uuid4(), ext)
+    return os.path.join('media/post_image', filename)
+
+class Post_images(models.Model):
+    image = ProcessedImageField(upload_to=vendor_avatar_name, format='JPEG', options={'quality': 80})
+    post = models.ForeignKey(Post)

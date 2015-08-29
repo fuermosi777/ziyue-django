@@ -2,9 +2,11 @@ beautifulsoup4==4.4.0
 boto==2.38.0
 Django==1.8.4
 django-appconf==1.0.1
+django-cors-headers==1.1.0
 django-imagekit==3.2.7
 django-storages==1.1.8
 feedparser==5.2.1
+hashids==1.1.0
 pilkit==1.1.13
 Pillow==2.9.0
 psycopg2==2.6.1

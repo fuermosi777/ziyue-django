@@ -21,7 +21,6 @@ def get_post(url):
         'title': post['title'],
         'body': post['content'],
         'source': post['url'],
-        'feature': post['pic'],
         'datetime': datetime.fromtimestamp(int(post['dateline'])).strftime('%Y-%m-%d %H:%M:%S'),
     }
 

@@ -27,11 +27,16 @@ try:
     import local
     DEBUG = True
 except:
-    DEBUG = True
+    DEBUG = False
 
 ALLOWED_HOSTS = [
     '*',
 ]
+
+if DEBUG:
+    CORS_ORIGIN_ALLOW_ALL = True
+else:
+    CORS_ORIGIN_ALLOW_ALL = False
 
 
 # Application definition
@@ -46,6 +51,7 @@ INSTALLED_APPS = (
     'api',
     'storages',
     'imagekit',
+    'corsheaders',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,6 +63,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 )
 
 ROOT_URLCONF = 'ziyue.urls'

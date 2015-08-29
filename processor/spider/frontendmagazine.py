@@ -11,7 +11,6 @@ def crawl():
             'datetime': datetime.strptime(d['publishedTime'], '%Y-%m-%dT%H:%M:%S+08:00'),
             'body': d['content'],
             'source': 'http://zhuanlan.zhihu.com%s'%d['url'],
-            'feature': d['titleImage'],
         })
     return res
 

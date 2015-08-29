@@ -19,5 +19,6 @@ import api.views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/posts/$', api.views.posts),
     url(r'^api/post/$', api.views.post),
 ]
