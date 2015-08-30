@@ -31,7 +31,7 @@ class Vendor(models.Model):
 class Post(models.Model):
     title = models.TextField(unique=True)
     vendor = models.ForeignKey(Vendor)
-    datetime = models.DateTimeField(auto_now=True)
+    datetime = models.DateTimeField()
     body = models.TextField()
     source = models.URLField()
 

@@ -6,6 +6,8 @@ from time import mktime
 from datetime import datetime
 import HTMLParser
 
+# partial func
+
 def load_soup(url):
     print 'start loading soup %s'%url
     page = urllib2.urlopen(url)
@@ -27,7 +29,17 @@ def unescape_body(body):
     '''
     return HTMLParser.HTMLParser().unescape(body)
 
-# similar crawler
+def rss_get_link_list(url):
+    fd = load_feed(url)
+    res = []
+    for f in fd.entries:
+        res.append(f.link)
+    return res
+
+def hard_scrape_post(url, title_select, body_select, datetime_select, date_format):
+    pass
+
+# complete crawler
 
 def std_rss_crawl(url, should_unescape=False):
     res = []
