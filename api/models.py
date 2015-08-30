@@ -29,7 +29,7 @@ class Vendor(models.Model):
 
 @python_2_unicode_compatible
 class Post(models.Model):
-    title = models.TextField()
+    title = models.TextField(unique=True)
     vendor = models.ForeignKey(Vendor)
     datetime = models.DateTimeField(auto_now=True)
     body = models.TextField()

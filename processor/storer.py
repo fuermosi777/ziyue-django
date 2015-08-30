@@ -5,19 +5,15 @@ import urllib2
 from bs4 import BeautifulSoup as BS
 
 def store(vendor, post):
+    p = Post(title=post['title'], vendor=vendor, body=post['body'], source=post['source'], datetime=post['datetime'])
     try:
-        p = Post.objects.get(title=post['title'])
-        print 'Post already exists %s'%post['title']
-    except:
-
-        p = Post(title=post['title'], vendor=vendor, body=post['body'], source=post['source'], datetime=post['datetime'])
         p.save()
-
         body = extract_images(vendor, p)
         p.body = body
         p.save()
-
         print 'New post added %s'%p.title
+    except:
+        print 'Post already exists %s'%post['title']
 
 def extract_images(vendor, post):
     soup = BS(post.body)
