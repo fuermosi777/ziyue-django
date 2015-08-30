@@ -24,7 +24,7 @@ def extract_images(vendor, post):
     for img in soup.findAll('img'):
         print img['src']
         img['src'] = store_post_image_from_url(vendor, img['src'], post)
-    return str(soup)
+    return unicode(soup)
 
 def store_post_image_from_url(vendor, image_url, post):
     headers = {
