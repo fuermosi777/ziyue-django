@@ -6,6 +6,7 @@ import re
 import itertools
 from django.db.models import Q
 from decorators import domain_verify
+import tools
 
 import encrypter
 
@@ -27,7 +28,8 @@ def posts(request):
         res = [{
             'id': encrypter.encode(p.id),
             'title': p.title,
-            'datetime': p.datetime,
+            'datetime': tools.humanize_timesince(p.datetime),
+            'source': p.source,
             'vendor': {
                 'name': p.vendor.name,
                 'avatar': p.vendor.avatar.url,
@@ -48,7 +50,11 @@ def post(request):
             res = {
                 'title': post_instance.title,
                 'body': post_instance.body,
-                'datetime': post_instance.datetime,
+                'datetime': tools.humanize_timesince(post_instance.datetime),
+                'source': post_instance.source,
+                'vendor': {
+                    'name': post_instance.vendor.name,
+                },
             }
             return JsonResponse(res, safe=False)
         else:

@@ -19,11 +19,10 @@ def store(vendor, post):
 
         print 'New post added %s'%p.title
 
-
-
 def extract_images(vendor, post):
     soup = BS(post.body)
     for img in soup.findAll('img'):
+        print img['src']
         img['src'] = store_post_image_from_url(vendor, img['src'], post)
     return str(soup)
 
