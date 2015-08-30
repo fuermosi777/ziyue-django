@@ -24,7 +24,7 @@ def posts(request):
             posts = Post.objects.filter(vendor__categorys__in=[category_instance])
         if vendor_id:
             posts = Post.objects.filter(vendor_id=vendor_id)
-        posts = posts.order_by('-id')[start:start+15]
+        posts = posts.order_by('-datetime')[start:start+15]
         res = [{
             'id': encrypter.encode(p.id),
             'title': p.title,
