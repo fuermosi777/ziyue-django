@@ -37,10 +37,22 @@ def rss_get_link_list(url):
     return res
 
 def hard_scrape_post(url, title_select, body_select, datetime_select, date_format):
-    pass
+    soup = load_soup(url)
+    title = soup.select(title_select)[0].get_text()
+    body = unicode(soup.select(body_select)[0])
+    d = datetime.strptime(soup.select(datetime_select)[0].get_text(), date_format)
+    return {
+        'title': title,
+        'body': body,
+        'datetime': d,
+        'source': url,
+    }
 
 # complete crawler
 
+# standard rss gives full content
+# sometimes escaped HTML need to set 
+# should_unescape = True
 def std_rss_crawl(url, should_unescape=False):
     res = []
     fd = load_feed(url)
@@ -62,4 +74,13 @@ def std_rss_crawl(url, should_unescape=False):
             'source': e.link,
             'datetime': datetime.fromtimestamp(mktime(e.published_parsed)),
         })
+    return res
+
+# rss only gives link list
+# not full content
+def list_rss_crawl(url, title_select, body_select, datetime_select, date_format):
+    list = rss_get_link_list(url)
+    res = []
+    for l in list:
+        res.append(hard_scrape_post(l, title_select=title_select, body_select=body_select, datetime_select=datetime_select, date_format=date_format))
     return res

@@ -21,9 +21,9 @@ def posts(request):
         start = int(start)
         if category:
             category_instance = Category.objects.get(slug=category)
-            posts = Post.objects.filter(vendor__categorys__in=[category_instance])
+            posts = Post.objects.filter(vendor__is_alive=True).filter(vendor__categorys__in=[category_instance])
         if vendor_id:
-            posts = Post.objects.filter(vendor_id=vendor_id)
+            posts = Post.objects.filter(vendor__is_alive=True).filter(vendor_id=vendor_id)
         posts = posts.order_by('-datetime')[start:start+15]
         res = [{
             'id': encrypter.encode(p.id),
