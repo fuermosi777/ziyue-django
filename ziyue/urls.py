@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^api/posts/$', api.views.posts),
     url(r'^api/post/$', api.views.post),
     url(r'^api/post/search/$', api.views.post_search),
+    url(r'^api/vendors/$', api.views.vendors),
+    url(r'^api/vendor/posts/$', api.views.vendor_posts),
 ]

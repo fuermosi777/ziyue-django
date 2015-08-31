@@ -2,6 +2,7 @@
 
 import pytz
 from datetime import datetime
+import encrypter
 
 
 def humanize_timesince(date):
@@ -27,3 +28,16 @@ def humanize_timesince(date):
         return u"%d 分钟前"%num_minutes
 
     return u"刚刚"
+
+def wrap_posts(post_instance):
+    return [{
+        'id': encrypter.encode(p.id),
+        'title': p.title,
+        'datetime': humanize_timesince(p.datetime),
+        'source': p.source,
+        'vendor': {
+            'name': p.vendor.name,
+            'avatar': p.vendor.avatar.url,
+            'url': p.vendor.url,
+        },
+    } for p in post_instance]

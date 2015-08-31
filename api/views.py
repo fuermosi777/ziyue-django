@@ -28,17 +28,7 @@ def posts(request):
             posts = Post.objects.filter(vendor__is_alive=True).filter(vendor_id=vendor_id)
         posts = posts.order_by('-datetime')[start:start+15]
         res = {
-            'data': [{
-                'id': encrypter.encode(p.id),
-                'title': p.title,
-                'datetime': tools.humanize_timesince(p.datetime),
-                'source': p.source,
-                'vendor': {
-                    'name': p.vendor.name,
-                    'avatar': p.vendor.avatar.url,
-                    'url': p.vendor.url,
-                },
-            } for p in posts],
+            'data': tools.wrap_posts(posts),
             'hasNext': True,
         }
         return JsonResponse(res, safe=False)
@@ -76,17 +66,42 @@ def post_search(request):
         posts = Post.objects.filter(title__icontains=q).order_by('-datetime')[start:start+30]
         if posts:
             res = {
-                'data':[{
-                    'id': encrypter.encode(p.id),
-                    'title': p.title,
-                    'datetime': tools.humanize_timesince(p.datetime),
-                    'source': p.source,
-                    'vendor': {
-                        'name': p.vendor.name,
-                        'avatar': p.vendor.avatar.url,
-                        'url': p.vendor.url,
-                    },
-                } for p in posts],
+                'data': tools.wrap_posts(posts),
+                'hasNext': False,
+            }
+            return JsonResponse(res, safe=False)
+        else:
+            return HttpResponse(status=404)
+
+@domain_verify
+def vendors(request):
+    category = request.GET.get('category', None)
+    if not category:
+        return HttpResponse(status=500)
+    else:
+        vendors = Vendor.objects.filter(categorys__slug__in=[category])
+        if vendors:
+            res = [{
+                'id': encrypter.encode(v.id),
+                'name': v.name,
+                'url': v.url,
+                'avatar': v.avatar.url,
+            } for v in vendors]
+            return JsonResponse(res, safe=False)
+        else:
+            return HttpResponse(status=404)
+
+@domain_verify
+def vendor_posts(request):
+    vendor_id = request.GET.get('vendor_id', None)
+    if not vendor_id:
+        return HttpResponse(status=500)
+    else:
+        vendor_id = encrypter.decode(vendor_id)
+        posts = Posts.objects.filter(vendor__id=vendor_id)[start:start+30]
+        if posts:
+            res = {
+                'data': tools.wrap_posts(posts),
                 'hasNext': False,
             }
             return JsonResponse(res, safe=False)
