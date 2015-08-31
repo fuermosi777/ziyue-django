@@ -7,6 +7,7 @@ from multiprocessing import Pool
 from django.db import connection
 
 def update_vendor_post(vendor):
+    print unicode(datetime.now())
     connection.close()
     spider = getattr(__import__('processor.spider', fromlist=[str(vendor.slug)]), str(vendor.slug))
     post_list = spider.crawl()
@@ -21,7 +22,7 @@ class Command(BaseCommand):
         for v in vendors:
             vendor_list.append(v)
 
-        pool = Pool(6)
+        pool = Pool(10)
         pool.map(update_vendor_post, vendor_list)
         pool.close()
         pool.join()

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from api.models import *
@@ -25,17 +27,20 @@ def posts(request):
         if vendor_id:
             posts = Post.objects.filter(vendor__is_alive=True).filter(vendor_id=vendor_id)
         posts = posts.order_by('-datetime')[start:start+15]
-        res = [{
-            'id': encrypter.encode(p.id),
-            'title': p.title,
-            'datetime': tools.humanize_timesince(p.datetime),
-            'source': p.source,
-            'vendor': {
-                'name': p.vendor.name,
-                'avatar': p.vendor.avatar.url,
-                'url': p.vendor.url,
-            },
-        } for p in posts]
+        res = {
+            'data': [{
+                'id': encrypter.encode(p.id),
+                'title': p.title,
+                'datetime': tools.humanize_timesince(p.datetime),
+                'source': p.source,
+                'vendor': {
+                    'name': p.vendor.name,
+                    'avatar': p.vendor.avatar.url,
+                    'url': p.vendor.url,
+                },
+            } for p in posts],
+            'hasNext': True,
+        }
         return JsonResponse(res, safe=False)
 
 @domain_verify
@@ -55,6 +60,34 @@ def post(request):
                 'vendor': {
                     'name': post_instance.vendor.name,
                 },
+            }
+            return JsonResponse(res, safe=False)
+        else:
+            return HttpResponse(status=404)
+
+@domain_verify
+def post_search(request):
+    q = request.GET.get('q', None)
+    start = request.GET.get('start', None)
+    if not q or not start:
+        return HttpResponse(status=500)
+    else:
+        start = int(start)
+        posts = Post.objects.filter(title__icontains=q).order_by('-datetime')[start:start+30]
+        if posts:
+            res = {
+                'data':[{
+                    'id': encrypter.encode(p.id),
+                    'title': p.title,
+                    'datetime': tools.humanize_timesince(p.datetime),
+                    'source': p.source,
+                    'vendor': {
+                        'name': p.vendor.name,
+                        'avatar': p.vendor.avatar.url,
+                        'url': p.vendor.url,
+                    },
+                } for p in posts],
+                'hasNext': False,
             }
             return JsonResponse(res, safe=False)
         else:
