@@ -1,2 +1,17 @@
 {% extends "base.html" %}
 
+{% block noscript %}
+    <h2>文章分类</h2>
+    <ul>
+    {% for c in categorys %}
+    <li><a href="/{{ c.slug }}">{{ c.name }}</a></li>
+    {% endfor %}
+    </ul>
+
+    <h2>最新文章</h2>
+    <ul>
+        {% for p in posts %}
+        <li><a href="/post/{{ p.encoded_id }}">{{ p.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

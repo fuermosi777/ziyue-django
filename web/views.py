@@ -4,11 +4,27 @@ from api.models import *
 from api import encrypter
 
 def home(request):
-    context = {}
+    category_instance = Category.objects.get(slug='technews')
+    posts = Post.objects.filter(vendor__is_alive=True, vendor__categorys__in=[category_instance]).order_by('-datetime')[:50]
+    categorys = Category.objects.all()
+    for p in posts:
+        p.encoded_id = encrypter.encode(p.id)
+    context = {
+        'posts': posts,
+        'categorys': categorys,
+    }
     return render(request, 'home.html', context)
 
 def category(request, category_slug):
-    context = {}
+    category_instance = Category.objects.get(slug=category_slug)
+    posts = Post.objects.filter(vendor__is_alive=True, vendor__categorys__in=[category_instance]).order_by('-datetime')[:50]
+    categorys = Category.objects.all()
+    for p in posts:
+        p.encoded_id = encrypter.encode(p.id)
+    context = {
+        'posts': posts,
+        'categorys': categorys,
+    }
     return render(request, 'category.html', context)
 
 def post(request, post_id):

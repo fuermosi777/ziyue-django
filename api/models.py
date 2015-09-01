@@ -6,8 +6,8 @@ from django.utils.encoding import python_2_unicode_compatible
 
 @python_2_unicode_compatible
 class Category(models.Model):
-    name = models.CharField(max_length=30)
-    slug = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
+    slug = models.CharField(max_length=30, unique=True)
 
     def __str__(self):
         return self.name
@@ -19,8 +19,8 @@ def vendor_avatar_name(instance, filename):
 
 @python_2_unicode_compatible
 class Vendor(models.Model):
-    name = models.CharField(max_length=30)
-    slug = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
+    slug = models.CharField(max_length=30, unique=True)
     url = models.URLField()
     avatar = ProcessedImageField(upload_to=vendor_avatar_name, processors=[ResizeToFill(300, 300)], format='JPEG', options={'quality': 80})
     categorys = models.ManyToManyField(Category)
