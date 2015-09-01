@@ -1,1 +1,12 @@
 {% extends "base.html" %}
+{% block noscript %}
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.datetime|date:'Y-m-d f' }}</p>
+    <p>来源: <a href={{ post.vendor.url  }} target="_blank">{{ post.vendor.name }}</a></p>
+    <p>原文链接: <a href={{ post.source }} target="_blank">{{ post.source }}</a></p>
+    <div>
+    {% autoescape off %}
+        {{ post.body }}
+    {% endautoescape %}
+    </div>
+{% endblock %}

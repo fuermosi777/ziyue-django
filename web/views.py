@@ -4,7 +4,8 @@ from api.models import *
 from api import encrypter
 
 def home(request):
-    return HttpResponseRedirect('/technews')
+    context = {}
+    return render(request, 'home.html', context)
 
 def category(request, category_slug):
     context = {}
@@ -15,7 +16,10 @@ def post(request, post_id):
         post_id = encrypter.decode(post_id)
     except:
         return HttpResponse(status=404)
-    context = {}
+    post_instance = Post.objects.get(id=post_id)
+    context = {
+        'post': post_instance
+    }
     return render(request, 'post.html', context)
 
 def vendor(request, vendor_id):
