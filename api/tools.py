@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-
+from pytz import timezone
 import pytz
-from datetime import datetime
+from datetime import datetime, timedelta
 import encrypter
 
 
 def humanize_timesince(date):
-    delta = datetime.now(pytz.utc) - date
+    delta = datetime.now(timezone('Asia/Shanghai')) - date + timedelta(hours=8)
 
     num_years = delta.days / 365
     if (num_years > 0):
