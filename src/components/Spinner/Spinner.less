@@ -1,0 +1,17 @@
+@import "../Base/Base";
+
+.Spinner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    &-img {
+        position: absolute;
+        width: 50px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        display: block;
+        top: 50%;
+        .transformTranslateY(-50%);
+    }
+}

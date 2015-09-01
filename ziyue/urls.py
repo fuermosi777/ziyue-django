@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 import api.views
+import web.views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -24,4 +25,11 @@ urlpatterns = [
     url(r'^api/post/search/$', api.views.post_search),
     url(r'^api/vendors/$', api.views.vendors),
     url(r'^api/vendor/posts/$', api.views.vendor_posts),
+]
+
+urlpatterns += [
+    url(r'^$', web.views.home),
+    url(r'^(?P<category_slug>\w+)$', web.views.category),
+    url(r'^post/(?P<post_id>\w+)$', web.views.post),
+    url(r'^vendor/(?P<vendor_id>\w+)$', web.views.vendor),
 ]

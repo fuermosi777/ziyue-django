@@ -1,0 +1,94 @@
+@import "../Base/Base";
+.PostList {
+    height: 100%;
+    width: 260px;
+    position: absolute;
+    top: 0;
+    left: 220px;
+    z-index: 1;
+    padding-bottom: 40px;
+    @media @xs {
+        left: 100%;
+        width: 100%;
+        margin-top: 64px;
+        height: ~'calc(100% - 64px)';
+        -webkit-overflow-scrolling: touch;
+    }
+    &-list {
+        display: block;
+        overflow-y: auto;
+        height: 100%;
+        li {
+            list-style: none;
+            padding: 15px 15px;
+            cursor: pointer;
+            .top {
+                margin-bottom: 5px;
+                span.title {
+                    font-size: 1.4rem;
+                }
+            }
+            .bottom {
+                font-size: 1.2rem;
+                img.avatar {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    vertical-align: middle;
+                    margin-right: 5px;
+                }
+                span.author {}
+                span.date {
+                    float: right;
+                }
+            }
+            span.more {
+                font-size: 1.4rem;
+            }
+        }
+    }
+    &-control {
+        position: absolute;
+        width: 100%;
+        height: 40px;
+        bottom: 0;
+        left: 0;
+        padding: 7px 40px 0 15px;
+        i {
+            position: absolute;
+            top: 9px;
+            right: 15px;
+            font-size: 1.8rem;
+        }
+        input.search-input {
+            width: 100%;
+            height: 26px;
+            border: none;
+            broder-radius: 4px;
+            padding: 0 5px;
+            background-color: white;
+            font-size: 1.3rem;
+        }
+        label.search-input-label {
+            position: absolute;
+            top: 11px;
+            left: 20px;
+            font-size: 1.3rem;
+            color: #AAAAAA;
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            top: -4px;
+            left: 0;
+            background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.05)));
+            background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 100%);
+            background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 100%);
+            background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 100%);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 100%);
+        }
+    }
+}

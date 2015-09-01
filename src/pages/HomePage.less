@@ -1,0 +1,327 @@
+@import "../components/Base/Base.less";
+.HomePage {
+    height: 100%;
+    @media @xs {
+        .transition(0.2s);
+        .transformTranslateX(-100%);
+        &.show-info-sidebar {
+            .transformTranslateX(0);
+        }
+        &.show-main {
+            .transformTranslateX(-200%);
+        }
+    }
+    // themes
+    &.default {
+        .InfoSidebar {
+            background-color: #282727;
+            &-title {
+                color: white;
+            }
+            &-categorys {
+                li {
+                    color: white;
+                    &.active,
+                    &:hover {
+                        background-color: #595759;
+                    }
+                }
+            }
+            &-info {
+                color: white;
+            }
+            &-panel {
+                color: white;
+                background-color: #282727;
+            }
+        }
+        .PostList {
+            background-color: #F9F8F4;
+            border-left: 1px solid #DEDBCD;
+            border-right: 1px solid #EBEAE6;
+            &-list {
+                li {
+                    &.active,
+                    &:hover {
+                        background-color: #F0EEE8;
+                    }
+                }
+                .top .title {
+                    color: #4F4F4F;
+                }
+                .bottom {
+                    color: #AAAAAA;
+                }
+                span.more {
+                    color: #BBBAB7;
+                }
+            }
+            &-control {
+                background-color: #F9F8F4;
+                color: #4F4F4F;
+            }
+        }
+        .Main {
+            background-color: #F8F7F5;
+            .post-title {
+                color: #42413F;
+            }
+            .post-info {
+                color: #AAAAAA;
+                span.vendor:hover {
+                    color: darken(#AAAAAA, 20%);
+                }
+            }
+            .post {
+                color: black;
+                a {
+                    color: #313131;
+                }
+                pre,
+                blockquote {
+                    background-color: #F2F1EF;
+                }
+            }
+            .top-control .fa {
+                color: #BCBBBA;
+                &:hover {
+                    color: darken(#BCBBBA, 10%);
+                }
+            }
+            .bottom-control {
+                background-color: rgba(248, 247, 245, 0.9);
+                a {
+                    color: #AAAAAA;
+                    &:hover {
+                        color: lighten(#AAA, 10%)
+                    }
+                }
+            }
+        }
+        .VendorList {
+            background-color: #F7F7F7;
+            .content {
+                border: 1px solid #DEDBCD;
+                background-color: #F9F8F4;
+                &.active,
+                &:hover {
+                    background-color: #F0EEE8;
+                }
+            }
+            li {
+                color: #AAAAAA;
+            }
+            .name {
+                color: #4F4F4F;
+            }
+        }
+    }
+    &.original {
+        .InfoSidebar {
+            background-color: #E5E2D3;
+            &-title {
+                color: #5A5549;
+            }
+            &-categorys {
+                li {
+                    color: #5A5549;
+                    &.active,
+                    &:hover {
+                        background-color: #E1DCCC;
+                    }
+                }
+            }
+            &-info {
+                color: #5A5549;
+            }
+            &-panel {
+                color: #5A5549;
+                background-color: #E5E2D3;
+            }
+        }
+        .PostList {
+            background-color: #F9F8F4;
+            border-left: 1px solid #DEDBCD;
+            border-right: 1px solid #EBEAE6;
+            &-list {
+                li {
+                    &.active,
+                    &:hover {
+                        background-color: #F0EEE8;
+                    }
+                }
+                .top .title {
+                    color: #4F4F4F;
+                }
+                .bottom {
+                    color: #AAAAAA;
+                }
+                span.more {
+                    color: #BBBAB7;
+                }
+            }
+            &-control {
+                background-color: #F9F8F4;
+                color: #4F4F4F;
+            }
+        }
+        .Main {
+            background-color: #F8F7F5;
+            .post-title {
+                color: #42413F;
+            }
+            .post-info {
+                color: #AAAAAA;
+                span.vendor:hover {
+                    color: darken(#AAAAAA, 20%);
+                }
+            }
+            .post {
+                color: black;
+                a {
+                    color: #313131;
+                }
+                pre,
+                blockquote {
+                    background-color: #F2F1EF;
+                }
+            }
+            .top-control .fa {
+                color: #BCBBBA;
+                &:hover {
+                    color: darken(#BCBBBA, 10%);
+                }
+            }
+            .bottom-control {
+                background-color: rgba(248, 247, 245, 0.9);
+                a {
+                    color: #AAAAAA;
+                    &:hover {
+                        color: lighten(#AAA, 10%)
+                    }
+                }
+            }
+        }
+        .VendorList {
+            background-color: #F7F7F7;
+            .content {
+                border: 1px solid #DEDBCD;
+                background-color: #F9F8F4;
+                &.active,
+                &:hover {
+                    background-color: #F0EEE8;
+                }
+            }
+            li {
+                color: #AAAAAA;
+            }
+            .name {
+                color: #4F4F4F;
+            }
+        }
+    }
+    &.dark {
+        .InfoSidebar {
+            background-color: #383838;
+            &-title {
+                color: white;
+            }
+            &-categorys {
+                li {
+                    color: white;
+                    &.active,
+                    &:hover {
+                        background-color: #595759;
+                    }
+                }
+            }
+            &-info {
+                color: white;
+            }
+            &-panel {
+                color: white;
+                background-color: #383838;
+            }
+        }
+        .PostList {
+            background-color: #414141;
+            border-left: 1px solid #404040;
+            border-right: 1px solid #414141;
+            &-list {
+                li {
+                    &.active,
+                    &:hover {
+                        background-color: #5C5B5C;
+                    }
+                }
+                .top .title {
+                    color: white;
+                }
+                .bottom {
+                    color: #979697;
+                }
+                span.more {
+                    color: #BBBAB7;
+                }
+            }
+            &-control {
+                background-color: #414141;
+                color: white;
+            }
+        }
+        .Main {
+            background-color: #4C4C4C;
+            .post-title {
+                color: white;
+            }
+            .post-info {
+                color: #9F9F9F;
+                span.vendor:hover {
+                    color: darken(#AAAAAA, 20%);
+                }
+            }
+            .post {
+                color: white;
+                a {
+                    color: white;
+                }
+                pre,
+                blockquote {
+                    background-color: #666666;
+                }
+            }
+            .top-control .fa {
+                color: white;
+                &:hover {
+                    color: darken(white, 10%);
+                }
+            }
+            .bottom-control {
+                background-color: rgba(76, 76, 76, 0.9);
+                a {
+                    color: #AAAAAA;
+                    &:hover {
+                        color: lighten(#AAA, 10%)
+                    }
+                }
+            }
+        }
+        .VendorList {
+            background-color: #4C4C4C;
+            .content {
+                border: 1px solid darken(#4C4C4C, 6%);
+                background-color: #414141;
+                &.active,
+                &:hover {
+                    background-color: #5C5B5C;
+                }
+            }
+            li {
+                color: white;
+            }
+            .name {
+                color: #AAAAAA;
+            }
+        }
+    }
+}

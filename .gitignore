@@ -13,3 +13,7 @@ __pycache__
 
 .sock
 *.sock
+
+node_modules/
+static/
+build/

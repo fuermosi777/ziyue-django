@@ -1,0 +1,73 @@
+@import "../Base/Base";
+.InfoSidebar {
+    height: 100%;
+    width: 220px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+    @media @xs {
+        width: 100%;
+    }
+    &-title {
+        margin-top: 15px;
+        padding: 5px 30px;
+        font-size: 1.4rem;
+        position: relative;
+        i {
+            position: absolute;
+            left: 13px;
+            top: 0px;
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+    }
+    &-categorys {
+        display: block;
+        margin-bottom: 15px;
+        animation-duration: 0.2s;
+        -webkit-animation-duration: 0.2s;
+        li {
+            font-size: 1.4rem;
+            padding: 5px 30px;
+            cursor: pointer;
+        }
+    }
+    &-info {
+        position: absolute;
+        width: 100%;
+        height: 40px;
+        left: 0;
+        bottom: 0;
+        i {
+            font-size: 1.8rem;
+            position: absolute;
+            top: 12px;
+            line-height: 1;
+        }
+        i.setting {
+            left: 15px;
+        }
+        i.question {
+            right: 15px;
+        }
+        span.name {
+            font-size: 1.4rem;
+            display: block;
+            width: 100px;
+            margin: 11px auto 0;
+            text-align: center;
+        }
+    }
+    &-panel {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 40px;
+        li {
+            font-size: 1.3rem;
+            padding: 5px 15px;
+        }
+    }
+}
