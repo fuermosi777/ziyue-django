@@ -15,5 +15,4 @@ __pycache__
 *.sock
 
 node_modules/
-static/
 build/

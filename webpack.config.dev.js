@@ -7,7 +7,7 @@ module.exports = {
         './src/entry.jsx'
     ],
     output: {
-        path: __dirname + '/static/build',
+        path: __dirname + '/build',
         publicPath: 'http://localhost:8080/',
         filename: 'bundle.js'
     },

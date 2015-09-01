@@ -7,7 +7,7 @@ module.exports = {
     ],
     output: {
         path: __dirname + '/static/build',
-        publichPath: 'https://s3-ap-southeast-1.amazonaws.com/ziyue/build/',
+        publichPath: '/build',
         filename: 'bundle.js'
     },
     module: {
