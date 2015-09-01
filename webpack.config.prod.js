@@ -7,7 +7,7 @@ module.exports = {
     ],
     output: {
         path: __dirname + '/build',
-        publichPath: 'http://ziyue.io/build/',
+        publicPath: 'http://ziyue.io/build/',
         filename: 'bundle.js'
     },
     module: {
