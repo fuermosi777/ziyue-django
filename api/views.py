@@ -86,6 +86,7 @@ def vendors(request):
                 'name': v.name,
                 'url': v.url,
                 'avatar': v.avatar.url,
+                'desc': v.desc,
             } for v in vendors]
             return JsonResponse(res, safe=False)
         else:

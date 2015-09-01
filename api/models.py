@@ -25,6 +25,7 @@ class Vendor(models.Model):
     avatar = ProcessedImageField(upload_to=vendor_avatar_name, processors=[ResizeToFill(300, 300)], format='JPEG', options={'quality': 80})
     categorys = models.ManyToManyField(Category)
     is_alive = models.BooleanField(default=True)
+    desc = models.TextField()
     def __str__(self):
         return self.name
 
