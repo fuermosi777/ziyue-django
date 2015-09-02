@@ -12,10 +12,10 @@ def store(vendor, post):
         body = extract_images(vendor, p)
         p.body = body
         p.save()
-        print ('New post added %s'%p.title).encode('utf8')
+        print 'New post added %s'%p.title
         return True
     except:
-        print ('Post already exists %s'%post['title']).encode('utf8')
+        print 'Post already exists %s'%post['title']
         return False
 
 def extract_images(vendor, post):
