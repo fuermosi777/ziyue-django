@@ -2,8 +2,6 @@ from bs4 import BeautifulSoup as BS
 import feedparser
 import urllib2
 import json
-from time import mktime
-from datetime import datetime
 import HTMLParser
 
 # partial func
@@ -42,18 +40,13 @@ def hard_scrape_list(url, list_select, list_url_pre):
         res.append(list_url_pre + l.get('href'))
     return res
 
-def hard_scrape_post(url, title_select, body_select, datetime_select=None, date_format=None):
+def hard_scrape_post(url, title_select, body_select):
     soup = load_soup(url)
     title = soup.select(title_select)[0].get_text()
     body = unicode(soup.select(body_select)[0])
-    if datetime_select:
-        d = datetime.strptime(soup.select(datetime_select)[0].get_text(), date_format)
-    else:
-        d = None
     return {
         'title': title,
         'body': body,
-        'datetime': d,
         'source': url,
     }
 
@@ -81,22 +74,21 @@ def std_rss_crawl(url, should_unescape=False):
             'title': e.title,
             'body': content,
             'source': e.link,
-            'datetime': datetime.fromtimestamp(mktime(e.published_parsed)),
         })
     return res
 
 # rss only gives link list
 # not full content
-def list_rss_crawl(url, title_select, body_select, datetime_select=None, date_format=None):
+def list_rss_crawl(url, title_select, body_select):
     list = rss_get_link_list(url)
     res = []
     for l in list:
-        res.append(hard_scrape_post(l, title_select=title_select, body_select=body_select, datetime_select=datetime_select, date_format=date_format))
+        res.append(hard_scrape_post(l, title_select=title_select, body_select=body_select))
     return res
 
-def hard_crawl(url, list_select, title_select, body_select, list_url_pre='', datetime_select=None, date_format=None):
+def hard_crawl(url, list_select, title_select, body_select, list_url_pre=''):
     list = hard_scrape_list(url, list_select, list_url_pre)
     res = []
     for l in list:
-        res.append(hard_scrape_post(l, title_select=title_select, body_select=body_select, datetime_select=datetime_select, date_format=date_format))
+        res.append(hard_scrape_post(l, title_select=title_select, body_select=body_select))
     return res

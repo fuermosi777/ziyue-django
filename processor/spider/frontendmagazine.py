@@ -8,7 +8,6 @@ def crawl():
     for d in data:
         res.append({
             'title': d['title'],
-            'datetime': datetime.strptime(d['publishedTime'], '%Y-%m-%dT%H:%M:%S+08:00'),
             'body': d['content'],
             'source': 'http://zhuanlan.zhihu.com%s'%d['url'],
         })

@@ -6,7 +6,7 @@ import encrypter
 
 
 def humanize_timesince(date):
-    delta = datetime.now(timezone('Asia/Shanghai')) - date + timedelta(hours=8)
+    delta = datetime.now() - date
 
     num_years = delta.days / 365
     if (num_years > 0):

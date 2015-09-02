@@ -21,7 +21,6 @@ def get_post(url):
         'title': post['title'],
         'body': post['content'],
         'source': post['url'],
-        'datetime': datetime.fromtimestamp(int(post['dateline'])).strftime('%Y-%m-%d %H:%M:%S'),
     }
 
 if __name__ == "__main__":

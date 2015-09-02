@@ -4,9 +4,11 @@ from django.core.files.temp import NamedTemporaryFile
 import urllib2
 from bs4 import BeautifulSoup as BS
 import pytz
+from datetime import timedelta, datetime
+from random import randint
 
 def store(vendor, post):
-    p = Post(title=post['title'], vendor=vendor, body=post['body'], source=post['source'], datetime=pytz.timezone('Asia/Shanghai').localize(post['datetime']))
+    p = Post(title=post['title'], vendor=vendor, body=post['body'], source=post['source'], datetime=random_date())
     try:
         p.save()
         body = extract_images(vendor, p)
@@ -15,6 +17,9 @@ def store(vendor, post):
         print 'New post added %s'%p.title
     except:
         print 'Post already exists %s'%post['title']
+
+def random_date():
+    return datetime.now(pytz.utc) + timedelta(minutes=randint(-15, 15))
 
 def extract_images(vendor, post):
     soup = BS(post.body)

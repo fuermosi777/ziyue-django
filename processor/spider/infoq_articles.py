@@ -27,7 +27,6 @@ def get_post(url):
         'title': title,
         'body': body,
         'source': url,
-        'datetime': datetime.now(),
     }
 
 if __name__ == "__main__":

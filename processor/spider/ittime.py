@@ -6,9 +6,7 @@ def crawl():
         list_select='.left-list a.img_212', 
         list_url_pre='http://news.ittime.com.cn', 
         title_select='.article h1', 
-        body_select='.articlep', 
-        datetime_select=None, 
-        date_format=None
+        body_select='.articlep'
     )
 
 if __name__ == "__main__":
