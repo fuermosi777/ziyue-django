@@ -3,6 +3,7 @@ import feedparser
 import urllib2
 import json
 import HTMLParser
+from processor import storer
 
 # partial func
 
@@ -40,10 +41,18 @@ def hard_scrape_list(url, list_select, list_url_pre):
         res.append(list_url_pre + l.get('href'))
     return res
 
-def hard_scrape_post(url, title_select, body_select):
+def hard_scrape_post(url, title_select, body_select, remove_tags):
     soup = load_soup(url)
     title = soup.select(title_select)[0].get_text()
-    body = unicode(soup.select(body_select)[0])
+    text_info = soup.select(body_select)[0]
+    # remove unwanted tags such as script, iframe... if needed
+    try:
+        for t in text_info:
+            if t.name in remove_tags:
+                t.extract()
+    except:
+        pass
+    body = unicode(text_info)
     return {
         'title': title,
         'body': body,
@@ -79,16 +88,16 @@ def std_rss_crawl(url, should_unescape=False):
 
 # rss only gives link list
 # not full content
-def list_rss_crawl(url, title_select, body_select):
+def list_rss_crawl(url, title_select, body_select, remove_tags=[]):
     list = rss_get_link_list(url)
     res = []
-    for l in list:
-        res.append(hard_scrape_post(l, title_select=title_select, body_select=body_select))
+    for l in storer.filter_list(list):
+        res.append(hard_scrape_post(l, title_select=title_select, body_select=body_select, remove_tags=[]))
     return res
 
-def hard_crawl(url, list_select, title_select, body_select, list_url_pre=''):
+def hard_crawl(url, list_select, title_select, body_select, list_url_pre='', remove_tags=[]):
     list = hard_scrape_list(url, list_select, list_url_pre)
     res = []
-    for l in list:
-        res.append(hard_scrape_post(l, title_select=title_select, body_select=body_select))
+    for l in storer.filter_list(list):
+        res.append(hard_scrape_post(l, title_select=title_select, body_select=body_select, remove_tags=[]))
     return res

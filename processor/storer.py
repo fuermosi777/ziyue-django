@@ -48,3 +48,14 @@ def store_post_image_from_url(vendor, image_url, post):
     p.save()
 
     return p.image.url
+
+def filter_list(list):
+    # remove existing article's titles
+    res = []
+    for l in list:
+        try:
+            p = Post.objects.get(title=l)
+            print 'Post exists before trying to get full: %s, stop'%l
+        except:
+            res.append(l)
+    return res
