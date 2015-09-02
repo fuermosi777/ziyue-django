@@ -19,7 +19,7 @@ def store(vendor, post):
         print 'Post already exists %s'%post['title']
 
 def random_date():
-    return datetime.now(pytz.utc) + timedelta(minutes=randint(-15, 15))
+    return datetime.now(pytz.utc) + timedelta(minutes=randint(-20, 0))
 
 def extract_images(vendor, post):
     soup = BS(post.body)
