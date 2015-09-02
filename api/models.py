@@ -51,6 +51,7 @@ class Post_image(models.Model):
 
 # LOG
 
+@python_2_unicode_compatible
 class Update_log(models.Model):
     success = models.BooleanField()
     vendor = models.ForeignKey(Vendor)
