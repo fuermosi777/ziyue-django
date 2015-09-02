@@ -67,7 +67,7 @@ def hard_scrape_post(url, title_select, body_select, datetime_select=None, date_
 def std_rss_crawl(url, should_unescape=False):
     res = []
     fd = load_feed(url)
-    for e in fd.entries:
+    for e in fd.entries[:30]:
         # sometimes all the content is in description
         # and there is no content at all
         if 'content' in e:
