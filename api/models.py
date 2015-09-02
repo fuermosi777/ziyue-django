@@ -59,4 +59,4 @@ class Update_log(models.Model):
     datetime = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.id
+        return self.vendor.name

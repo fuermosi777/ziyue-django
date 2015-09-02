@@ -11,15 +11,17 @@ def update_vendor_post(vendor):
     success = False
     connection.close()
     spider = getattr(__import__('processor.spider', fromlist=[str(vendor.slug)]), str(vendor.slug))
-    post_list = spider.crawl()
     try:
-        for p in post_list:
-            storer.store(vendor, p)
-            counter = counter + 1
+        post_list = spider.crawl()
         success = True
     except:
         success = False
-    log = Update_log(success=True, counter=counter, vendor=vendor)
+    if post_list:
+        for p in post_list:
+            stored = storer.store(vendor, p)
+            if stored:
+                counter = counter + 1
+    log = Update_log(success=success, counter=counter, vendor=vendor)
     log.save()
 
 class Command(BaseCommand):

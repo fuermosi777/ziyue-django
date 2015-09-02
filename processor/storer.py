@@ -3,22 +3,24 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 import urllib2
 from bs4 import BeautifulSoup as BS
+import pytz
 
 def store(vendor, post):
-    p = Post(title=post['title'], vendor=vendor, body=post['body'], source=post['source'], datetime=post['datetime'])
+    p = Post(title=post['title'], vendor=vendor, body=post['body'], source=post['source'], datetime=pytz.timezone('Asia/Shanghai').localize(post['datetime']))
     try:
         p.save()
         body = extract_images(vendor, p)
         p.body = body
         p.save()
         print 'New post added %s'%p.title
+        return True
     except:
         print 'Post already exists %s'%post['title']
+        return False
 
 def extract_images(vendor, post):
     soup = BS(post.body)
     for img in soup.findAll('img'):
-        print img['src']
         img['src'] = store_post_image_from_url(vendor, img['src'], post)
     return unicode(soup)
 
