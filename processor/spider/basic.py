@@ -9,10 +9,8 @@ import HTMLParser
 # partial func
 
 def load_soup(url):
-    print 'start loading soup %s'%url
     page = urllib2.urlopen(url)
     soup = BS(page.read())
-    print 'finish loading soup %s'%url
     return soup
 
 def load_feed(url):
