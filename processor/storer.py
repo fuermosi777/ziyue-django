@@ -54,7 +54,7 @@ def filter_list(list):
     res = []
     for l in list:
         try:
-            p = Post.objects.get(title=l)
+            p = Post.objects.get(source=l)
             print 'Post exists before trying to get full: %s, stop'%l
         except:
             res.append(l)

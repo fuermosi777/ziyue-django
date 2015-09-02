@@ -35,7 +35,7 @@ class Post(models.Model):
     vendor = models.ForeignKey(Vendor)
     datetime = models.DateTimeField()
     body = models.TextField()
-    source = models.URLField()
+    source = models.URLField(unique=True)
 
     def __str__(self):
         return self.title

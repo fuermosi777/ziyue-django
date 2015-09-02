@@ -104,7 +104,7 @@ DATABASES = {
          'NAME': 'ziyue_db',
          'USER': 'fuermosi777',
          'PASSWORD': 'lh14589123',
-         'HOST': 'ziyue-db.clansbmy63wh.ap-southeast-1.rds.amazonaws.com',
+         'HOST': 'ziyuedb.clansbmy63wh.ap-southeast-1.rds.amazonaws.com',
          'PORT': '5432',
     }
 }
