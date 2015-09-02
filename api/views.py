@@ -106,7 +106,7 @@ def vendor_posts(request):
         if posts:
             res = {
                 'data': tools.wrap_posts(posts),
-                'name': vendor.name,
+                'name': vendor_instance.name,
                 'hasNext': False,
             }
             return JsonResponse(res, safe=False)
