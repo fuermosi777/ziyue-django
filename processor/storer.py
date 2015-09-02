@@ -13,10 +13,8 @@ def store(vendor, post):
         p.body = body
         p.save()
         print 'New post added %s'%p.title
-        return True
     except:
         print 'Post already exists %s'%post['title']
-        return False
 
 def extract_images(vendor, post):
     soup = BS(post.body)

@@ -7,22 +7,11 @@ from multiprocessing import Pool
 from django.db import connection
 
 def update_vendor_post(vendor):
-    counter = 0
-    success = False
-    connection.close()
     spider = getattr(__import__('processor.spider', fromlist=[str(vendor.slug)]), str(vendor.slug))
-    try:
-        post_list = spider.crawl()
-        success = True
-    except:
-        success = False
-    if post_list:
-        for p in post_list:
-            stored = storer.store(vendor, p)
-            if stored:
-                counter = counter + 1
-    log = Update_log(success=success, counter=counter, vendor=vendor)
-    log.save()
+    post_list = spider.crawl()
+    for p in post_list:
+        storer.store(vendor, p)
+    connection.close()
 
 class Command(BaseCommand):
     help = ""

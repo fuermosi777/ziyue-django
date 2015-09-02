@@ -23,10 +23,10 @@ def posts(request):
         start = int(start)
         if category:
             category_instance = Category.objects.get(slug=category)
-            posts = Post.objects.filter(vendor__is_alive=True, vendor__categorys__in=[category_instance]).order_by('-datetime')
+            posts = Post.objects.filter(vendor__is_alive=True, vendor__categorys__in=[category_instance])
         if vendor_id:
-            posts = Post.objects.filter(vendor__is_alive=True, vendor_id=vendor_id).order_by('-datetime')
-        posts = posts[start:start+15]
+            posts = Post.objects.filter(vendor__is_alive=True, vendor_id=vendor_id)
+        posts = posts.order_by('-datetime')[start:start+15]
         res = {
             'data': tools.wrap_posts(posts),
             'hasNext': True,
@@ -101,10 +101,12 @@ def vendor_posts(request):
     else:
         vendor_id = encrypter.decode(vendor_id)
         start = int(start)
-        posts = Post.objects.filter(vendor__id=vendor_id)[start:start+30]
+        vendor_instance = Vendor.objects.get(id=vendor_id)
+        posts = Post.objects.filter(vendor__id=vendor_id).order_by('-datetime')[start:start+30]
         if posts:
             res = {
                 'data': tools.wrap_posts(posts),
+                'name': vendor.name,
                 'hasNext': False,
             }
             return JsonResponse(res, safe=False)

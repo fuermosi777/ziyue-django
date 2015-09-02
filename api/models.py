@@ -48,15 +48,3 @@ def post_image_name(instance, filename):
 class Post_image(models.Model):
     image = ProcessedImageField(upload_to=post_image_name, options={'quality': 80})
     post = models.ForeignKey(Post)
-
-# LOG
-
-@python_2_unicode_compatible
-class Update_log(models.Model):
-    success = models.BooleanField()
-    vendor = models.ForeignKey(Vendor)
-    counter = models.IntegerField()
-    datetime = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.vendor.name
