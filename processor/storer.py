@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup as BS
 import pytz
 from datetime import timedelta, datetime
 from random import randint
+from urlparse import urlparse, urljoin
 
 def store(vendor, post):
     p = Post(title=post['title'], vendor=vendor, body=post['body'], source=post['source'], datetime=random_date())
@@ -27,6 +28,14 @@ def extract_images(vendor, post):
         img['src'] = store_post_image_from_url(vendor, img['src'], post)
     return unicode(soup)
 
+def url_add_pre(pre, url):
+    # turn url such as '/xxx.jpg' to 'http://aa.com/xxx.jpg'
+    parse_res = urlparse(url)
+    if not parse_res.netloc:
+        return urljoin(pre, url)
+    else:
+        return url
+
 def store_post_image_from_url(vendor, image_url, post):
     headers = {
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
@@ -37,7 +46,7 @@ def store_post_image_from_url(vendor, image_url, post):
         # 'Connection': 'keep-alive',
         'referer': vendor.url,
     }
-
+    image_url = url_add_pre(vendor.url, image_url)
     request = urllib2.Request(image_url, headers=headers)
 
     img_temp = NamedTemporaryFile(delete=True)
