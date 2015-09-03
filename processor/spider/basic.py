@@ -43,8 +43,12 @@ def hard_scrape_list(url, list_select, list_url_pre):
 
 def hard_scrape_post(url, title_select, body_select, remove_tags):
     soup = load_soup(url)
-    title = soup.select(title_select)[0].get_text()
-    text_info = soup.select(body_select)[0]
+    try:
+        title = soup.select(title_select)[0].get_text()
+        text_info = soup.select(body_select)[0]
+    except:
+        print 'Wrong hard scraping %s'%url
+        return None
     # remove unwanted tags such as script, iframe... if needed
     try:
         for t in text_info:
@@ -99,5 +103,7 @@ def hard_crawl(url, list_select, title_select, body_select, list_url_pre='', rem
     list = hard_scrape_list(url, list_select, list_url_pre)
     res = []
     for l in storer.filter_list(list):
-        res.append(hard_scrape_post(l, title_select=title_select, body_select=body_select, remove_tags=[]))
+        post = hard_scrape_post(l, title_select=title_select, body_select=body_select, remove_tags=[])
+        if post:
+            res.append(post)
     return res
