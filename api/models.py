@@ -48,3 +48,6 @@ def post_image_name(instance, filename):
 class Post_image(models.Model):
     image = ProcessedImageField(upload_to=post_image_name, options={'quality': 80})
     post = models.ForeignKey(Post)
+
+    def __str__(self):
+        return self.post.title

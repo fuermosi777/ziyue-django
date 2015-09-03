@@ -18,15 +18,10 @@ def store(vendor, post):
         print 'New post added %s'%p.title
     except:
         print 'Post already exists %s'%post['title']
+        pass
 
 def random_date():
     return datetime.now(pytz.utc) + timedelta(minutes=randint(-20, 0))
-
-def extract_images(vendor, post):
-    soup = BS(post.body)
-    for img in soup.findAll('img'):
-        img['src'] = store_post_image_from_url(vendor, img['src'], post)
-    return unicode(soup)
 
 def url_add_pre(pre, url):
     # turn url such as '/xxx.jpg' to 'http://aa.com/xxx.jpg'
@@ -35,6 +30,13 @@ def url_add_pre(pre, url):
         return urljoin(pre, url)
     else:
         return url
+
+def extract_images(vendor, post):
+    soup = BS(post.body)
+    for img in soup.findAll('img'):
+        img_src = url_add_pre(vendor.url, img['src'])
+        img['src'] = store_post_image_from_url(vendor, img_src, post)
+    return unicode(soup)
 
 def store_post_image_from_url(vendor, image_url, post):
     headers = {
@@ -46,7 +48,6 @@ def store_post_image_from_url(vendor, image_url, post):
         # 'Connection': 'keep-alive',
         'referer': vendor.url,
     }
-    image_url = url_add_pre(vendor.url, image_url)
     request = urllib2.Request(image_url, headers=headers)
 
     img_temp = NamedTemporaryFile(delete=True)
@@ -55,7 +56,6 @@ def store_post_image_from_url(vendor, image_url, post):
 
     p = Post_image(image=File(img_temp), post=post)
     p.save()
-
     return p.image.url
 
 def filter_list(list):
