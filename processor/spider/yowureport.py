@@ -1,5 +1,5 @@
 import basic
-from processor impor storer
+from processor import storer
 
 def crawl():
     list = basic.hard_scrape_list(url='https://yowureport.com/category/public/', list_select='.archive-post > .thumbnail > a', list_url_pre='')
