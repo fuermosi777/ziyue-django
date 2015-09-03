@@ -48,6 +48,8 @@ def store_post_image_from_url(vendor, image_url, post):
         # 'Connection': 'keep-alive',
         'referer': vendor.url,
     }
+    if urlparse(image_url).scheme == 'data':
+        return image_url
     request = urllib2.Request(image_url, headers=headers)
 
     img_temp = NamedTemporaryFile(delete=True)
