@@ -70,7 +70,7 @@ export default React.createClass({
     },
 
     handleQuestionClick() {
-        window.location.href = "mailto:liuhao1990@gmail.com?subject=意见/建议/问题&body=如有任何疑问，请联系我们吧！";
+        window.location.href = "mailto:hello@ziyue.io?subject=意见/建议/问题&body=如有任何疑问，请联系我们吧！";
     },
 
     handleThemeItemClick(t) {
