@@ -16,6 +16,9 @@
         height: ~'calc(100% - 64px)';
         -webkit-overflow-scrolling: touch;
     }
+    @media @sm {
+        padding-left: 180px + 220px;
+    }
     &-wrapper {
         height: 100%;
         width: 100%;
@@ -29,6 +32,12 @@
             padding: 15px;
             cursor: pointer;
             vertical-align: top;
+            @media @sm {
+                width: 50%;
+            }
+            @media @md {
+                width: 33.33%;
+            }
             .content {
                 padding: 15px;
                 height: 100%;

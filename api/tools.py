@@ -7,7 +7,6 @@ import encrypter
 
 def humanize_timesince(date):
     delta = datetime.now(pytz.utc) - date
-    print datetime.now(pytz.utc), date
     num_years = delta.days / 365
     if (num_years > 0):
         return u"%d 年前"%num_years

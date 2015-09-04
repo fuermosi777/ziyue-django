@@ -11,317 +11,178 @@
             .transformTranslateX(-200%);
         }
     }
-    // themes
-    &.default {
+}
+
+@default: 
+    name default, 
+    left-bg #282727, 
+    left-text #FFFFFF, 
+    left-tint #575557, 
+    mid-bg #F9F8F4, 
+    mid-text #4F4F4F, 
+    mid-text-sub #AAAAAA, 
+    mid-tint #F0EEE8, 
+    mid-border #EBEAE6, 
+    right-bg #F7F7F7, 
+    right-text #4F4F4F, 
+    right-text-sub #AAAAAA, 
+    right-border #DEDBCD, 
+    right-tint #F0EEE8;
+@original:
+    name original, 
+    left-bg #E5E2D2, 
+    left-text #5A5548,
+    left-tint #E1DCCB,
+    mid-bg #F9F8F4,
+    mid-text #4F4F4F,
+    mid-text-sub #AAAAAA,
+    mid-tint #F0EEE8,
+    mid-border #EBEAE6,
+    right-bg #F7F7F7,
+    right-text #4F4F4F,
+    right-text-sub #AAAAAA,
+    right-border #DEDBCD,
+    right-tint #F0EEE8;
+@dark:
+    name dark, 
+    left-bg #383838, 
+    left-text #FFFFFF,
+    left-tint #585658,
+    mid-bg #414141,
+    mid-text #FFFFFF,
+    mid-text-sub #979697,
+    mid-tint #5C5B5C,
+    mid-border #414141,
+    right-bg #4C4C4C,
+    right-text #FFFFFF,
+    right-text-sub #979697,
+    right-border #3D3D3D,
+    right-tint #5C5B5C;
+
+.createTheme(@theme) {
+    @name: extract(extract(@theme, 1), 2);
+    @left-bg: extract(extract(@theme, 2), 2);
+    @left-text: extract(extract(@theme, 3), 2);
+    @left-tint: extract(extract(@theme, 4), 2);
+    @mid-bg: extract(extract(@theme, 5), 2);
+    @mid-text: extract(extract(@theme, 6), 2);
+    @mid-text-sub: extract(extract(@theme, 7), 2);
+    @mid-tint: extract(extract(@theme, 8), 2);
+    @mid-border: extract(extract(@theme, 9), 2);
+    @right-bg: extract(extract(@theme, 10), 2);
+    @right-text: extract(extract(@theme, 11), 2);
+    @right-text-sub: extract(extract(@theme, 12), 2);
+    @right-border: extract(extract(@theme, 13), 2);
+    @right-tint: extract(extract(@theme, 14), 2);
+    .@{name} {
         .InfoSidebar {
-            background-color: #282727;
-            &-title {
-                color: white;
+            background-color: @left-bg;
+            &-title,
+            &-info,
+            &-panel {
+                color: @left-text;
+            }
+            &-panel {
+                background-color: @left-bg;
             }
             &-categorys {
                 li {
-                    color: white;
+                    color: @left-text;
                     &.active,
                     &:hover {
-                        background-color: #595759;
+                        background-color: @left-tint;
                     }
                 }
             }
-            &-info {
-                color: white;
-            }
-            &-panel {
-                color: white;
-                background-color: #282727;
-            }
+
         }
         .PostList {
-            background-color: #F9F8F4;
-            border-left: 1px solid #DEDBCD;
-            border-right: 1px solid #EBEAE6;
+            background-color: @mid-bg;
+            border-left: 1px solid @mid-border;
+            border-right: 1px solid @mid-border;
             &-list {
                 li {
                     &.active,
                     &:hover {
-                        background-color: #F0EEE8;
+                        background-color: @mid-tint;
                     }
                 }
                 .top .title {
-                    color: #4F4F4F;
+                    color: @mid-text;
                 }
                 .bottom {
-                    color: #AAAAAA;
+                    color: @mid-text-sub;
                 }
                 span.more {
-                    color: #BBBAB7;
+                    color: @mid-text-sub;
                 }
             }
             &-control {
-                background-color: #F9F8F4;
-                color: #4F4F4F;
+                background-color: @mid-bg;
+                color: @mid-text;
             }
         }
         .Main {
-            background-color: #F8F7F5;
+            background-color: @right-bg;
             .post-title {
-                color: #42413F;
+                color: @right-text;
             }
             .post-info {
-                color: #AAAAAA;
+                color: @right-text-sub;
                 span.vendor:hover {
-                    color: darken(#AAAAAA, 20%);
+                    color: @right-text;
                 }
             }
             .post {
-                color: black;
+                color: @right-text;
                 a {
-                    color: #313131;
+                    color: @right-text;
                 }
                 pre,
                 blockquote {
-                    background-color: #F2F1EF;
+                    background-color: darken(@right-bg, 10%);
                 }
             }
+            .top-control {
+                background-color: @right-bg;
+            }
             .top-control .fa {
-                color: #BCBBBA;
+                color: @right-text-sub;
                 &:hover {
-                    color: darken(#BCBBBA, 10%);
+                    color: @right-text;
                 }
             }
             .bottom-control {
-                background-color: rgba(248, 247, 245, 0.9);
+                background-color: @right-bg;
+                opacity: 0.92;
                 a {
-                    color: #AAAAAA;
+                    color: @right-text-sub;
                     &:hover {
-                        color: lighten(#AAA, 10%)
+                        color: @right-text;
                     }
                 }
             }
         }
         .VendorList {
-            background-color: #F7F7F7;
+            background-color: @right-bg;
             .content {
-                border: 1px solid #DEDBCD;
-                background-color: #F9F8F4;
+                border: 1px solid @right-border;
+                background-color: @right-bg;
                 &.active,
                 &:hover {
-                    background-color: #F0EEE8;
+                    background-color: @right-tint;
                 }
             }
             li {
-                color: #AAAAAA;
+                color: @right-text;
             }
             .name {
-                color: #4F4F4F;
-            }
-        }
-    }
-    &.original {
-        .InfoSidebar {
-            background-color: #E5E2D3;
-            &-title {
-                color: #5A5549;
-            }
-            &-categorys {
-                li {
-                    color: #5A5549;
-                    &.active,
-                    &:hover {
-                        background-color: #E1DCCC;
-                    }
-                }
-            }
-            &-info {
-                color: #5A5549;
-            }
-            &-panel {
-                color: #5A5549;
-                background-color: #E5E2D3;
-            }
-        }
-        .PostList {
-            background-color: #F9F8F4;
-            border-left: 1px solid #DEDBCD;
-            border-right: 1px solid #EBEAE6;
-            &-list {
-                li {
-                    &.active,
-                    &:hover {
-                        background-color: #F0EEE8;
-                    }
-                }
-                .top .title {
-                    color: #4F4F4F;
-                }
-                .bottom {
-                    color: #AAAAAA;
-                }
-                span.more {
-                    color: #BBBAB7;
-                }
-            }
-            &-control {
-                background-color: #F9F8F4;
-                color: #4F4F4F;
-            }
-        }
-        .Main {
-            background-color: #F8F7F5;
-            .post-title {
-                color: #42413F;
-            }
-            .post-info {
-                color: #AAAAAA;
-                span.vendor:hover {
-                    color: darken(#AAAAAA, 20%);
-                }
-            }
-            .post {
-                color: black;
-                a {
-                    color: #313131;
-                }
-                pre,
-                blockquote {
-                    background-color: #F2F1EF;
-                }
-            }
-            .top-control .fa {
-                color: #BCBBBA;
-                &:hover {
-                    color: darken(#BCBBBA, 10%);
-                }
-            }
-            .bottom-control {
-                background-color: rgba(248, 247, 245, 0.9);
-                a {
-                    color: #AAAAAA;
-                    &:hover {
-                        color: lighten(#AAA, 10%)
-                    }
-                }
-            }
-        }
-        .VendorList {
-            background-color: #F7F7F7;
-            .content {
-                border: 1px solid #DEDBCD;
-                background-color: #F9F8F4;
-                &.active,
-                &:hover {
-                    background-color: #F0EEE8;
-                }
-            }
-            li {
-                color: #AAAAAA;
-            }
-            .name {
-                color: #4F4F4F;
-            }
-        }
-    }
-    &.dark {
-        .InfoSidebar {
-            background-color: #383838;
-            &-title {
-                color: white;
-            }
-            &-categorys {
-                li {
-                    color: white;
-                    &.active,
-                    &:hover {
-                        background-color: #595759;
-                    }
-                }
-            }
-            &-info {
-                color: white;
-            }
-            &-panel {
-                color: white;
-                background-color: #383838;
-            }
-        }
-        .PostList {
-            background-color: #414141;
-            border-left: 1px solid #404040;
-            border-right: 1px solid #414141;
-            &-list {
-                li {
-                    &.active,
-                    &:hover {
-                        background-color: #5C5B5C;
-                    }
-                }
-                .top .title {
-                    color: white;
-                }
-                .bottom {
-                    color: #979697;
-                }
-                span.more {
-                    color: #BBBAB7;
-                }
-            }
-            &-control {
-                background-color: #414141;
-                color: white;
-            }
-        }
-        .Main {
-            background-color: #4C4C4C;
-            .post-title {
-                color: white;
-            }
-            .post-info {
-                color: #9F9F9F;
-                span.vendor:hover {
-                    color: darken(#AAAAAA, 20%);
-                }
-            }
-            .post {
-                color: white;
-                a {
-                    color: white;
-                }
-                pre,
-                blockquote {
-                    background-color: #666666;
-                }
-            }
-            .top-control .fa {
-                color: white;
-                &:hover {
-                    color: darken(white, 10%);
-                }
-            }
-            .bottom-control {
-                background-color: rgba(76, 76, 76, 0.9);
-                a {
-                    color: #AAAAAA;
-                    &:hover {
-                        color: lighten(#AAA, 10%)
-                    }
-                }
-            }
-        }
-        .VendorList {
-            background-color: #4C4C4C;
-            .content {
-                border: 1px solid darken(#4C4C4C, 6%);
-                background-color: #414141;
-                &.active,
-                &:hover {
-                    background-color: #5C5B5C;
-                }
-            }
-            li {
-                color: white;
-            }
-            .name {
-                color: #AAAAAA;
+                color: @right-text-sub;
             }
         }
     }
 }
+
+.createTheme(@original);
+.createTheme(@default);
+.createTheme(@dark);

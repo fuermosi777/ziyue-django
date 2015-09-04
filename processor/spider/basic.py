@@ -56,7 +56,7 @@ def hard_scrape_post(url, title_select, body_select, remove_tags):
                 t.extract()
     except:
         pass
-    body = unicode(text_info)
+    body = ''.join([unicode(x) for x in text_info.contents]) 
     return {
         'title': title,
         'body': body,
