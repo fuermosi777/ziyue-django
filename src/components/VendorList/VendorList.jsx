@@ -20,7 +20,7 @@ export default React.createClass({
                     <div className="content" onClick={this.handleVendorClick.bind(this, item)}>
                         <img src={item.avatar} className="avatar"/>
                         <div className="name">{item.name}</div>
-                        <div className="bottom">{item.desc.substring(0, 60) + '...'}</div>
+                        <div className="bottom">{item.desc}</div>
                     </div>
                 </li>
             );

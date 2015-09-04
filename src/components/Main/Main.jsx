@@ -33,6 +33,7 @@ export default React.createClass({
                     <div className="post-wrapper">
         	            {!this.props.isLoading && this.props.post ? <div className="post-title">{this.props.post.title}</div> : ''}
                         {!this.props.isLoading && this.props.post ? <div className="post-info">
+                            <img className="avatar" src={this.props.post.vendor.avatar}/>
                             <span className="vendor" onClick={this.handleVendorClick}>{this.props.post.vendor.name}</span>
                             <span className="date">{this.props.post.datetime}</span>
                         </div> : ''}
