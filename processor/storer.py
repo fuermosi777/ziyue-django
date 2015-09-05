@@ -57,6 +57,7 @@ def store_post_image_from_url(vendor, image_url, post):
     img_temp.flush()
 
     p = Post_image(image=File(img_temp), post=post)
+    print p.vendor.source
     p.save()
     return p.image.url
 
