@@ -18,10 +18,15 @@ class Command(BaseCommand):
     args = '<test>'
     def handle(self, *args, **options):
         vendors = Vendor.objects.all()
-        if args and args[0] == 'test':
-            for v in vendors:
-                print '[TEST] start %s'%v.name
-                update_vendor_post(v)
+        if args:
+            if args[0] == 'test':
+                for v in vendors:
+                    print '[TEST] start %s'%v.name
+                    update_vendor_post(v)
+            else:
+                vendor = Vendor.objects.get(slug=args[0])
+                print '[TEST] start %s'%vendor.name
+                update_vendor_post(vendor)
         else:
             vendor_list = []
             for v in vendors:

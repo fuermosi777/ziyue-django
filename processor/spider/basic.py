@@ -8,7 +8,11 @@ from processor import storer
 # partial func
 
 def load_soup(url):
-    page = urllib2.urlopen(url)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
+    }
+    request = urllib2.Request(url, headers=headers)
+    page = urllib2.urlopen(request)
     soup = BS(page.read())
     return soup
 
@@ -16,7 +20,11 @@ def load_feed(url):
     return feedparser.parse(url)
 
 def load_json(url):
-    resp = urllib2.urlopen(url)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
+    }
+    request = urllib2.Request(url, headers=headers)
+    resp = urllib2.urlopen(request)
     data = json.loads(resp.read())
     return data
 
