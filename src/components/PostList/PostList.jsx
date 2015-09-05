@@ -2,6 +2,7 @@ import React from 'react';
 import Styles from './PostList.less';
 import Spinner from '../Spinner/Spinner.jsx';
 import Tracker from '../../utils/Tracker.js';
+import ReadLaterService from '../../services/ReadLaterService.js';
 
 const LENGTH = 25;
 
@@ -17,8 +18,13 @@ export default React.createClass({
     getInitialState() {
         return {
             shouldShowSearchInput: false,
-            keyword: ''
+            keyword: '',
+            readLaterStatuses: []
         };
+    },
+
+    componentWillReceiveProps(props) {
+        this.updateReadLaterStatuses(props.posts);
     },
 
     render() {
@@ -26,7 +32,7 @@ export default React.createClass({
             return (
                 <li key={i} onClick={this.handlePostClick.bind(this, item)} className={this.props.selectedPostId && this.props.selectedPostId === item.id ? 'active' : ''}>
                     <div className="top"><span className="title">{item.title}</span></div>
-                    <div className="bottom"><img className="avatar" src={item.vendor.avatar}/><span className="author">{item.vendor.name}</span><span className="date">{item.datetime}</span></div>
+                    <div className="bottom"><img className="avatar" src={item.vendor.avatar}/><span className="author">{item.vendor.name}</span><i className={this.state.readLaterStatuses[i] ? "ion-ios-book active": "ion-ios-book-outline"} onClick={this.handleReadLaterBtn.bind(this, item)}></i><span className="date">{item.datetime}</span></div>
                 </li>
             );
         });
@@ -83,4 +89,16 @@ export default React.createClass({
         }
     },
 
+    handleReadLaterBtn(e, event) {
+        this.props.onReadLaterBtnClick(e);
+        this.updateReadLaterStatuses(this.props.posts);
+        event.stopPropagation();
+    },
+
+    updateReadLaterStatuses(posts) {
+        let readLaterStatuses = posts.map((item) => {
+            return !!ReadLaterService.getPost(item.id);
+        });
+        this.setState({readLaterStatuses: readLaterStatuses});
+    }
 });

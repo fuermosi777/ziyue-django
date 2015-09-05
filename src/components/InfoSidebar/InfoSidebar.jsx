@@ -7,14 +7,17 @@ export default React.createClass({
     propsType: {
         categorys: React.PropTypes.array,
         selectedCategory: React.PropTypes.object,
-        onThemeSelected: React.PropTypes.func
+        onThemeSelected: React.PropTypes.func,
+        onReadLaterSelect: React.PropTypes.func,
+        readLaterNumber: React.PropTypes.number
     },
 
     getInitialState() {
         return {
             keyword: '',
             isSettingOpen: false,
-            isCategoryOpen: true
+            isCategoryOpen: true,
+            isPersonalOpen: true
         }
     },
 
@@ -39,6 +42,11 @@ export default React.createClass({
                 <div className="InfoSidebar-title" onClick={this.handleDiscoverBtnClick}><i className={this.state.isCategoryOpen ? "ion-android-arrow-dropdown" : "ion-android-arrow-dropright"}></i>发现</div>
                 {this.state.isCategoryOpen ? <ul className="InfoSidebar-categorys animated fadeInDown">
                     {Categorys}
+                </ul> : ''}
+
+                <div className="InfoSidebar-title" onClick={this.handlePersonalBtnClick}><i className={this.state.isPersonalOpen ? "ion-android-arrow-dropdown" : "ion-android-arrow-dropright"}></i>个人</div>
+                {this.state.isPersonalOpen ? <ul className="InfoSidebar-categorys animated fadeInDown">
+                    <li onClick={this.handleReadLaterBtnClick}>稍后阅读 <span className="badge">{this.props.readLaterNumber}</span></li>
                 </ul> : ''}
 
                 <div className="InfoSidebar-info">
@@ -79,5 +87,13 @@ export default React.createClass({
 
     handleDiscoverBtnClick() {
         this.setState({'isCategoryOpen': !this.state.isCategoryOpen});
+    },
+
+    handlePersonalBtnClick() {
+        this.setState({'isPersonalOpen': !this.state.isPersonalOpen});
+    },
+
+    handleReadLaterBtnClick() {
+        this.props.onReadLaterSelect();
     }
 });

@@ -7,6 +7,7 @@ import NavigationBar from '../components/NavigationBar/NavigationBar.jsx';
 import Constant from '../utils/Constant.js';
 import {Navigation, State} from 'react-router';
 import ContentService from '../services/ContentService.js';
+import ReadLaterService from '../services/ReadLaterService.js';
 import ThemeService from '../services/ThemeService.js';
 import Processor from '../utils/Processor.js';
 import Tracker from '../utils/Tracker.js';
@@ -19,6 +20,8 @@ export default React.createClass({
         return {
             categorys: Constant.CATEGORYS,        // array
             category: null,                    // object
+
+            readLaterNumber: ReadLaterService.getPosts().length,
 
             posts: [],                     // array
             start: 0,                       // number
@@ -93,7 +96,9 @@ export default React.createClass({
                     onSearchVendor={this.handleSearchVendor} 
                     isMobileActive={this.state.isInfoSidebarMobileActive} 
                     onBack={this.hideInfoSidebar} 
-                    onThemeSelected={this.handleThemeSelected}/>
+                    onThemeSelected={this.handleThemeSelected}
+                    readLaterNumber={this.state.readLaterNumber}
+                    onReadLaterSelect={this.handleReadLaterSelect}/>
                 <PostList posts={this.state.posts} 
                     isLoading={this.state.postListIsLoading} 
                     selectedPostId={this.state.postId}
@@ -103,7 +108,8 @@ export default React.createClass({
                     onPrev={this.handleMorePosts}
                     start={this.state.start}
                     hasNext={this.state.postListHasNext}
-                    onSearchPosts={this.handleSearchPosts}/>
+                    onSearchPosts={this.handleSearchPosts}
+                    onReadLaterBtnClick={this.handleReadLater}/>
             </div>
         );
     },
@@ -156,6 +162,13 @@ export default React.createClass({
             mainIsLoading: true,
             vendorListIsLoading: true
         });
+        // mark as read
+        let getPost = ReadLaterService.getPost(pid);
+        if (getPost) {
+            ReadLaterService.deletePost(pid);
+        }
+        this.setState({readLaterNumber: ReadLaterService.getPosts().length})
+        //
         ContentService.getPost(pid).then((res) => {
             this.replaceWith('post', {pid: pid});
             document.title = `子阅 - ${res.vendor.name} - ${res.title}`;
@@ -197,6 +210,24 @@ export default React.createClass({
         }).catch((err) => {
             this.setState({'postListIsLoading': false, postListHasNext: false, 'posts': null});
         }); 
+    },
+
+    handleReadLater(post) {
+        // from post list view
+        let getPost = ReadLaterService.getPost(post.id);
+        if (!getPost) {
+            ReadLaterService.addPost(post);
+        } else {
+            ReadLaterService.deletePost(post.id);
+        }
+        this.setState({readLaterNumber: ReadLaterService.getPosts().length});
+    },
+
+    handleReadLaterSelect() {
+        // from infosidebar view
+        let postsObject = ReadLaterService.getPosts();
+        document.title = `子阅 - 稍后阅读`;
+        this.setState({posts: postsObject, postListHasNext: false, postListIsLoading: false});
     },
 
     showInfoSidebar() {
