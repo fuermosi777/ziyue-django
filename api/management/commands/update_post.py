@@ -15,13 +15,19 @@ def update_vendor_post(vendor):
 
 class Command(BaseCommand):
     help = ""
+    args = '<test>'
     def handle(self, *args, **options):
         vendors = Vendor.objects.all()
-        vendor_list = []
-        for v in vendors:
-            vendor_list.append(v)
+        if args and args[0] == 'test':
+            for v in vendors:
+                print '[TEST] start %s'%v.name
+                update_vendor_post(v)
+        else:
+            vendor_list = []
+            for v in vendors:
+                vendor_list.append(v)
 
-        pool = Pool(10)
-        pool.map(update_vendor_post, vendor_list)
-        pool.close()
-        pool.join()
+            pool = Pool(10)
+            pool.map(update_vendor_post, vendor_list)
+            pool.close()
+            pool.join()
