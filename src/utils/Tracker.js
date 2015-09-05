@@ -23,5 +23,8 @@ export default {
     },
     trackReadSource(pid) {
         GA('send', 'event', 'post', 'zy-post-read-source', pid);
+    },
+    trackReadLater() {
+        GA('send', 'event', 'site', 'zy-read-later');
     }
 }

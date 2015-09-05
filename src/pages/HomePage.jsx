@@ -227,6 +227,7 @@ export default React.createClass({
         // from infosidebar view
         let postsObject = ReadLaterService.getPosts();
         document.title = `子阅 - 稍后阅读`;
+        Tracker.trackReadLater();
         this.setState({posts: postsObject, postListHasNext: false, postListIsLoading: false});
     },
 
