@@ -3,6 +3,7 @@ from pytz import timezone
 import pytz
 from datetime import datetime, timedelta
 import encrypter
+from api.models import *
 
 
 def humanize_timesince(date):

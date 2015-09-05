@@ -34,6 +34,21 @@ def posts(request):
         return JsonResponse(res, safe=False)
 
 @domain_verify
+def posts_recommand(request):
+    post_id = request.GET.get('post_id', None)
+    if not post_id:
+        return HttpResponse(status=500)
+    else:
+        post_id = encrypter.decode(post_id)
+        post = Post.objects.get(id=post_id)
+        posts = Post.objects.filter(vendor__is_alive=True, vendor__categorys__in=post.vendor.categorys.all()).order_by('?')[:5]
+        res = {
+            'data': tools.wrap_posts(posts),
+            'hasNext': False,
+        }
+        return JsonResponse(res, safe=False)
+
+@domain_verify
 def post(request):
     post_id = request.GET.get('post_id', None)
     if not post_id:

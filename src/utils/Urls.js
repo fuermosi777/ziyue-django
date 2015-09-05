@@ -4,6 +4,9 @@ export default {
     posts(category, start=0) {
         return `${urlPrefix}/api/posts/?category=${category}&start=${start}`;
     },
+    recommendPosts(post_id) {
+        return `${urlPrefix}/api/posts/recommend/?post_id=${post_id}`;
+    },
     vendors(category) {
         return `${urlPrefix}/api/vendors/?category=${category}`;
     },

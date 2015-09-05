@@ -11,6 +11,10 @@ export default {
         return Basic.GET(Urls.posts(category, start));
     },
 
+    getRecommendPosts(postId) {
+        return Basic.GET(Urls.recommendPosts(postId));
+    },
+
     getPost(id) {
     	return Basic.GET(Urls.post(id));
     },

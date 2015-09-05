@@ -29,6 +29,7 @@ export default React.createClass({
             postListHasNext: false,
 
             post: null,                    // object
+            recommendPosts: [],             // array
             mainIsLoading: false,           // bool
 
             vendorId: null,                // string
@@ -83,7 +84,9 @@ export default React.createClass({
                     isLoading={this.state.mainIsLoading} 
                     isActive={this.state.isMainMobileActive} 
                     onCloseClick={this.hideMain} 
-                    onVendorClick={this.handleVendorSelected}/> : ''}
+                    recommendPosts={this.state.recommendPosts}
+                    onVendorClick={this.handleVendorSelected}
+                    onRecommendPostSelect={this.handlePostSelected}/> : ''}
                 {!this.state.post ? 
                 <VendorList
                     vendors={this.state.vendors}
@@ -169,13 +172,19 @@ export default React.createClass({
         }
         this.setState({readLaterNumber: ReadLaterService.getPosts().length})
         //
-        ContentService.getPost(pid).then((res) => {
+        let getPostPromise = ContentService.getPost(pid);
+        let getRecommendPostsPromise = ContentService.getRecommendPosts(pid);
+
+        Promise.all([getPostPromise, getRecommendPostsPromise]).then((res) =>{
+            let resPost = res[0];
+            let resRecommendPosts = res[1];
             this.replaceWith('post', {pid: pid});
-            document.title = `子阅 - ${res.vendor.name} - ${res.title}`;
+            document.title = `子阅 - ${resPost.vendor.name} - ${resPost.title}`;
             Tracker.trackPostPageView(pid);
-            res.body = Processor.processPost(res.body);
+            resPost.body = Processor.processPost(resPost.body);
             this.setState({
-                post: res, 
+                post: resPost, 
+                recommendPosts: resRecommendPosts.data,
                 mainIsLoading: false,
                 vendorListIsLoading: false
             });
