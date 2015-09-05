@@ -106,7 +106,7 @@ def list_rss_crawl(url, title_select, body_select, remove_tags=[]):
     for l in storer.filter_list(list):
         post = hard_scrape_post(l, title_select=title_select, body_select=body_select, remove_tags=[])
         if post:
-            res.append()
+            res.append(post)
     return res
 
 def hard_crawl(url, list_select, title_select, body_select, list_url_pre='', remove_tags=[]):
