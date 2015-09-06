@@ -133,8 +133,8 @@
             }
             .post-info {
                 color: @right-text-sub;
-                span.vendor:hover {
-                    color: @right-text;
+                a {
+                   color: @right-text-sub; 
                 }
             }
             .post {
@@ -155,6 +155,16 @@
                 &:hover {
                     color: @right-text;
                 }
+            }
+            a.read-source-button {
+                background-color: darken(@right-bg, 5%);
+                color: @right-text;
+                &:hover {
+                    background-color: darken(@right-bg, 10%);
+                }
+            }
+            ul.recommend {
+                color: @right-text;
             }
             .bottom-control {
                 background-color: @right-bg;

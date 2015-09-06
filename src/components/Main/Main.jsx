@@ -43,10 +43,11 @@ export default React.createClass({
         	            {!this.props.isLoading && this.props.post ? <div className="post-title">{this.props.post.title}</div> : ''}
                         {!this.props.isLoading && this.props.post ? <div className="post-info">
                             <img className="avatar" src={this.props.post.vendor.avatar}/>
-                            <span className="vendor" onClick={this.handleVendorClick}>{this.props.post.vendor.name}</span>
+                            <span className="vendor"><a href={this.props.post.vendor.url} target="_blank">{this.props.post.vendor.name}</a></span>
                             <span className="date">{this.props.post.datetime}</span>
                         </div> : ''}
                     	{!this.props.isLoading && this.props.post ? <div className="post" dangerouslySetInnerHTML={{__html: this.props.post.body}} /> : ''}
+                        {!this.props.isLoading && this.props.post ? <a href={this.props.post.source} className="read-source-button" target="_blank">阅读原文</a> : ''}
                         {!this.props.isLoading && this.props.post ? 
                             <ul className="recommend">
                                 <li className="recommend-title">相关阅读</li>

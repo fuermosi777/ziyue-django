@@ -65,6 +65,7 @@ def post(request):
                 'vendor': {
                     'name': post_instance.vendor.name,
                     'avatar': post_instance.vendor.avatar.url,
+                    'url': post_instance.vendor.url,
                 },
             }
             return JsonResponse(res, safe=False)
