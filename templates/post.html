@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block title %}子阅 - {{ post.vendor.name }} - {{ post.title }}{% endblock %}
 {% block noscript %}
     <h2>{{ post.title }}</h2>
     <p>{{ post.datetime|date:'Y-m-d f' }}</p>

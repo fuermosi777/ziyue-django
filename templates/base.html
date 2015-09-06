@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>子阅 - 最好的科技阅读器</title>
+    <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="keywords" content="科技资讯, 聚合阅读, 互联移动, 手机, 数码, 互联网, 移动, 前端技术, 后端技术, 程序设计, 程序员">
     <meta name="description" content="子阅(ziyue.io), 聚合不同媒体、自媒体和科技博客的商业科技类文章, 打造具有最佳用户体验的科技类文章阅读器">
@@ -56,7 +56,8 @@
     <script src="/build/bundle.js"></script>
     {% endif %}
     <noscript>
-    <h1>子阅 ziyue.io - 互联网科技阅读器</h1>
+    <h1>子阅 ziyue.io</h1>
+    <p>互联网科技阅读器</p>
     {% block noscript %}{% endblock %}
     </noscript>
 </body>

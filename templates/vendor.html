@@ -1,1 +1,10 @@
 {% extends "base.html" %}
+{% block title %}子阅 - {{ vendor.name }}{% endblock %}
+{% block noscript %}
+    <h2>{{ vendor.name }}的文章</h2>
+    <ul>
+    {% for p in posts %}
+    <li><a href="/post/{{ p.encoded_id }}">{{ p.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
