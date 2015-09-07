@@ -29,6 +29,11 @@ try:
 except:
     DEBUG = False
 
+if not DBUG:
+    CACHE_BACKEND = 'memcached://127.0.0.1:30145/?timeout=900'
+else:
+    CACHE_BACKEND = 'dummy:///'
+
 INTERNAL_IPS = (
     '127.0.0.1',
 )
@@ -60,6 +65,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware', # cache start
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -70,6 +76,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware', # cache end
 )
 
 ROOT_URLCONF = 'ziyue.urls'
