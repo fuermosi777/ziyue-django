@@ -29,7 +29,7 @@ try:
 except:
     DEBUG = False
 
-if not DBUG:
+if not DEBUG:
     CACHE_BACKEND = 'memcached://127.0.0.1:30145/?timeout=900'
 else:
     CACHE_BACKEND = 'dummy:///'
