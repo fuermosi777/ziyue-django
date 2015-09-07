@@ -8,7 +8,10 @@ export default React.createClass({
     propsTypes: {
         isLoading: React.PropTypes.bool,
         post: React.PropTypes.object,
-        recommendPosts: React.PropTypes.array
+        recommendPosts: React.PropTypes.array,
+        onVendorClick: React.PropTypes.func,
+        onExpandBtnClick: React.PropTypes.func,
+        readingMode: React.PropTypes.bool
     },
 
 	getInitialState() {
@@ -35,7 +38,7 @@ export default React.createClass({
             );
         });
         return (
-            <div className="Main">
+            <div className={"Main " + (this.props.readingMode ? 'reading' : '')}>
                 <div className="Main-wrapper">
                     {this.props.isLoading ? <Spinner/> : ''}
                     {/* post */}
@@ -59,7 +62,8 @@ export default React.createClass({
                         <i className="fa fa-times-circle" onClick={this.handleCloseClick}></i>
                     </div> : ''}
                     {!this.props.isLoading && this.props.post ? <div className="bottom-control">
-                        <a href={this.props.post.source} target="_blank">阅读原文 <i className="fa fa-share"></i></a>
+                        <i className={"expand-btn " + (this.props.readingMode ? "ion-android-contract" : "ion-android-expand")} onClick={this.handleExpandBtnClick}></i>
+                        <a href={this.props.post.source} target="_blank" className="source-link">阅读原文 <i className="fa fa-share"></i></a>
                     </div> : ''}
                 </div>
             </div> 
@@ -92,5 +96,9 @@ export default React.createClass({
 
     handleRecommendPostClick(pid) {
         this.props.onRecommendPostSelect(pid);
+    },
+
+    handleExpandBtnClick() {
+        this.props.onExpandBtnClick();
     }
 });

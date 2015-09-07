@@ -32,5 +32,20 @@ export default {
                 }
             })
         });
+    },
+
+    findPostBasedOnId(posts, postId) {
+        let findIndex;
+        let find = posts.filter((item, i) => {
+            if (item.id === postId) {
+                findIndex = i;
+                return item;
+            }
+        });
+        if (find.length > 0) {
+            return findIndex;
+        } else {
+            return -1;
+        }
     }
 }

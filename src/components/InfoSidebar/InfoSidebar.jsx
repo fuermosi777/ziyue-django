@@ -9,7 +9,8 @@ export default React.createClass({
         selectedCategory: React.PropTypes.object,
         onThemeSelected: React.PropTypes.func,
         onReadLaterSelect: React.PropTypes.func,
-        readLaterNumber: React.PropTypes.number
+        readLaterNumber: React.PropTypes.number,
+        readingMode: React.PropTypes.bool
     },
 
     getInitialState() {
@@ -38,7 +39,7 @@ export default React.createClass({
         });
 
         return (
-            <div className="InfoSidebar">
+            <div className={"InfoSidebar " + (this.props.readingMode ? 'reading' : '')}>
                 <div className="InfoSidebar-title" onClick={this.handleDiscoverBtnClick}><i className={this.state.isCategoryOpen ? "ion-android-arrow-dropdown" : "ion-android-arrow-dropright"}></i>发现</div>
                 {this.state.isCategoryOpen ? <ul className="InfoSidebar-categorys animated fadeInDown">
                     {Categorys}

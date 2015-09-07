@@ -16,6 +16,14 @@
     @media @sm {
         padding-left: 180px + 220px;
     }
+    &.reading {
+        @media @sm {
+            padding-left: 220px;
+        }
+        @media @desktop {
+            padding-left: 260px;
+        }
+    }
     &-wrapper {
         width: 100%;
         height: 100%;
@@ -156,5 +164,11 @@
         left: 0;
         padding: 10px 10px 0 10px;
         font-size: 1.4rem;
+        i.expand-btn {
+            font-size: 1.8rem;
+        }
+        a.source-link {
+            float: right;
+        }
     }
 }

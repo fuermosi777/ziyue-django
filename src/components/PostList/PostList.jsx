@@ -2,6 +2,7 @@ import React from 'react';
 import Styles from './PostList.less';
 import Spinner from '../Spinner/Spinner.jsx';
 import Tracker from '../../utils/Tracker.js';
+import Basic from '../../utils/Basic.js';
 import ReadLaterService from '../../services/ReadLaterService.js';
 
 const LENGTH = 25;
@@ -12,7 +13,8 @@ export default React.createClass({
         selectedPostId: React.PropTypes.string,
         start: React.PropTypes.number,
         isLoading: React.PropTypes.bool,
-        hasNext: React.PropTypes.bool
+        hasNext: React.PropTypes.bool,
+        readingMode: React.PropTypes.bool
     },
 
     getInitialState() {
@@ -27,6 +29,14 @@ export default React.createClass({
         this.updateReadLaterStatuses(props.posts);
     },
 
+    componentWillMount() {
+        window.addEventListener('keydown', this.handleKeyDown);
+    },
+
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.handleKeyDown);
+    },
+
     render() {
         let PostList = this.props.posts.map((item, i) => {
             return (
@@ -38,7 +48,7 @@ export default React.createClass({
         });
 
         return (            
-            <div className="PostList">
+            <div className={"PostList " + (this.props.readingMode ? 'reading' : '')}>
                 {this.props.isLoading ? <Spinner/> : ''}
                 {this.props.isLoading ? '' : <ul className="PostList-list">
                     {this.props.start > 0 ? <li onClick={this.handlePrevClick}><span className="more">上一页</span></li> : ''}
@@ -93,6 +103,24 @@ export default React.createClass({
         this.props.onReadLaterBtnClick(e);
         this.updateReadLaterStatuses(this.props.posts);
         event.stopPropagation();
+    },
+
+    handleKeyDown(e) {
+        if (e.keyCode === 38) {
+            //up
+            e.preventDefault();
+            let findIndex = Basic.findPostBasedOnId(this.props.posts, this.props.selectedPostId);
+            if (findIndex > 0) {
+                this.handlePostClick(this.props.posts[findIndex - 1]);
+            }
+        } else if (e.keyCode === 40) {
+            e.preventDefault();
+            e.preventDefault();
+            let findIndex = Basic.findPostBasedOnId(this.props.posts, this.props.selectedPostId);
+            if (findIndex < this.props.posts.length - 1) {
+                this.handlePostClick(this.props.posts[findIndex + 1]);
+            }
+        }
     },
 
     updateReadLaterStatuses(posts) {

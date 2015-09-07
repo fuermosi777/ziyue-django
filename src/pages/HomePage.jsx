@@ -37,7 +37,8 @@ export default React.createClass({
             vendorListIsLoading: false,
 
             theme: ThemeService.getCurrentTheme(),      // object
-            mobileStatus: ''
+            mobileStatus: '',
+            readingMode: false
         }
     },
 
@@ -86,7 +87,9 @@ export default React.createClass({
                     onCloseClick={this.hideMain} 
                     recommendPosts={this.state.recommendPosts}
                     onVendorClick={this.handleVendorSelected}
-                    onRecommendPostSelect={this.handlePostSelected}/> : ''}
+                    onRecommendPostSelect={this.handlePostSelected}
+                    onExpandBtnClick={this.handleReadingModeToggle}
+                    readingMode={this.state.readingMode}/> : ''}
                 {!this.state.post ? 
                 <VendorList
                     vendors={this.state.vendors}
@@ -101,7 +104,8 @@ export default React.createClass({
                     onBack={this.hideInfoSidebar} 
                     onThemeSelected={this.handleThemeSelected}
                     readLaterNumber={this.state.readLaterNumber}
-                    onReadLaterSelect={this.handleReadLaterSelect}/>
+                    onReadLaterSelect={this.handleReadLaterSelect}
+                    readingMode={this.state.readingMode}/>
                 <PostList posts={this.state.posts} 
                     isLoading={this.state.postListIsLoading} 
                     selectedPostId={this.state.postId}
@@ -112,7 +116,8 @@ export default React.createClass({
                     start={this.state.start}
                     hasNext={this.state.postListHasNext}
                     onSearchPosts={this.handleSearchPosts}
-                    onReadLaterBtnClick={this.handleReadLater}/>
+                    onReadLaterBtnClick={this.handleReadLater}
+                    readingMode={this.state.readingMode}/>
             </div>
         );
     },
@@ -155,7 +160,6 @@ export default React.createClass({
             if (res.hasOwnProperty('list')) res = res.list;
             this.setState({start: end, posts: res.data, postListHasNext: res.hasNext, postListIsLoading: false});
         });
-
     },
 
     handlePostSelected(pid) {
@@ -238,6 +242,10 @@ export default React.createClass({
         document.title = `子阅 - 稍后阅读`;
         Tracker.trackReadLater();
         this.setState({posts: postsObject, postListHasNext: false, postListIsLoading: false});
+    },
+
+    handleReadingModeToggle() {
+        this.setState({readingMode: !this.state.readingMode});
     },
 
     showInfoSidebar() {
