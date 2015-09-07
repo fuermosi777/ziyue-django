@@ -41,12 +41,12 @@ export default React.createClass({
         return (
             <div className={"InfoSidebar " + (this.props.readingMode ? 'reading' : '')}>
                 <div className="InfoSidebar-title" onClick={this.handleDiscoverBtnClick}><i className={this.state.isCategoryOpen ? "ion-android-arrow-dropdown" : "ion-android-arrow-dropright"}></i>发现</div>
-                {this.state.isCategoryOpen ? <ul className="InfoSidebar-categorys animated fadeInDown">
+                {this.state.isCategoryOpen ? <ul className="InfoSidebar-categorys animated fadeInLeft">
                     {Categorys}
                 </ul> : ''}
 
                 <div className="InfoSidebar-title" onClick={this.handlePersonalBtnClick}><i className={this.state.isPersonalOpen ? "ion-android-arrow-dropdown" : "ion-android-arrow-dropright"}></i>个人</div>
-                {this.state.isPersonalOpen ? <ul className="InfoSidebar-categorys animated fadeInDown">
+                {this.state.isPersonalOpen ? <ul className="InfoSidebar-categorys animated fadeInLeft">
                     <li onClick={this.handleReadLaterBtnClick}>稍后阅读 <span className="badge">{this.props.readLaterNumber}</span></li>
                 </ul> : ''}
 

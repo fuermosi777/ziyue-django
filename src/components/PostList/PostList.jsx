@@ -50,7 +50,7 @@ export default React.createClass({
         return (            
             <div className={"PostList " + (this.props.readingMode ? 'reading' : '')}>
                 {this.props.isLoading ? <Spinner/> : ''}
-                {this.props.isLoading ? '' : <ul className="PostList-list">
+                {this.props.isLoading ? '' : <ul className="PostList-list animated fadeInDown">
                     {this.props.start > 0 ? <li onClick={this.handlePrevClick}><span className="more">上一页</span></li> : ''}
                     {PostList}
                     {this.props.hasNext ? <li onClick={this.handleNextClick}><span className="more">下一页</span></li> : ''}
