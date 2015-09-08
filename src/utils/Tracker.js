@@ -26,5 +26,8 @@ export default {
     },
     trackReadLater() {
         GA('send', 'event', 'site', 'zy-read-later');
+    },
+    trackFav() {
+        GA('send', 'event', 'site', 'zy-fav');
     }
 }

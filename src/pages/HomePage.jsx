@@ -8,6 +8,7 @@ import Constant from '../utils/Constant.js';
 import {Navigation, State} from 'react-router';
 import ContentService from '../services/ContentService.js';
 import ReadLaterService from '../services/ReadLaterService.js';
+import FavService from '../services/FavService.js';
 import ThemeService from '../services/ThemeService.js';
 import Processor from '../utils/Processor.js';
 import Tracker from '../utils/Tracker.js';
@@ -22,6 +23,7 @@ export default React.createClass({
             category: null,                    // object
 
             readLaterNumber: ReadLaterService.getPosts().length,
+            favNumber: FavService.getPosts().length,
 
             posts: [],                     // array
             start: 0,                       // number
@@ -85,6 +87,7 @@ export default React.createClass({
                     isLoading={this.state.mainIsLoading} 
                     isActive={this.state.isMainMobileActive} 
                     onCloseClick={this.hideMain} 
+                    onFavClick={this.handleFav}
                     recommendPosts={this.state.recommendPosts}
                     onVendorClick={this.handleVendorSelected}
                     onRecommendPostSelect={this.handlePostSelected}
@@ -104,6 +107,8 @@ export default React.createClass({
                     onBack={this.hideInfoSidebar} 
                     onThemeSelected={this.handleThemeSelected}
                     readLaterNumber={this.state.readLaterNumber}
+                    favNumber={this.state.favNumber}
+                    onFavSelect={this.handleFavSelect}
                     onReadLaterSelect={this.handleReadLaterSelect}
                     readingMode={this.state.readingMode}/>
                 <PostList posts={this.state.posts} 
@@ -246,6 +251,25 @@ export default React.createClass({
 
     handleReadingModeToggle() {
         this.setState({readingMode: !this.state.readingMode});
+    },
+
+    handleFav(post){
+        // from main view
+        let getPost = FavService.getPost(post.id);
+        if (!getPost) {
+            FavService.addPost(post);
+        } else {
+            FavService.deletePost(post.id);
+        }
+        this.setState({favNumber: FavService.getPosts().length});
+    },
+
+    handleFavSelect() {
+        // from infosiderbar view
+        let postsObject = FavService.getPosts();
+        document.title = `子阅 - 收藏文章`;
+        Tracker.trackFav();
+        this.setState({posts: postsObject, postListHasNext: false, postListIsLoading: false});
     },
 
     showInfoSidebar() {

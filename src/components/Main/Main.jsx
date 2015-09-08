@@ -2,6 +2,7 @@ import React from 'react';
 import Styles from './Main.less';
 import Spinner from '../Spinner/Spinner.jsx';
 import Tracker from '../../utils/Tracker.js';
+import FavService from '../../services/FavService.js';
 import $ from 'jquery';
 
 export default React.createClass({
@@ -16,6 +17,7 @@ export default React.createClass({
 
 	getInitialState() {
 		return {
+            favStatus: false
 		};
 	},
 
@@ -59,7 +61,8 @@ export default React.createClass({
                     </div>
                     {/* control */}
                     {!this.props.isLoading && this.props.post ? <div className="top-control">
-                        <i className="fa fa-times-circle" onClick={this.handleCloseClick}></i>
+                        <i className="ion-android-close close-btn" onClick={this.handleCloseClick}></i>
+                        <i className={"fav-btn " + (this.state.favStatus ? "ion-android-favorite active" : "ion-android-favorite-outline")} onClick={this.handleFavClick.bind(this, this.props.post)}></i>
                     </div> : ''}
                     {!this.props.isLoading && this.props.post ? <div className="bottom-control">
                         <i className={"expand-btn " + (this.props.readingMode ? "ion-android-contract" : "ion-android-expand")} onClick={this.handleExpandBtnClick}></i>
@@ -74,6 +77,7 @@ export default React.createClass({
     },
 
     componentWillReceiveProps(props) {
+        this.updateFavStatus(props.post);
     },
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -90,6 +94,11 @@ export default React.createClass({
         this.props.onCloseClick();
     },
 
+    handleFavClick(p) {
+        this.updateFavStatus(this.props.post);
+        this.props.onFavClick(p);
+    },
+
     handleVendorClick() {
         this.props.onVendorClick(this.props.post.vendorID);
     },
@@ -100,5 +109,10 @@ export default React.createClass({
 
     handleExpandBtnClick() {
         this.props.onExpandBtnClick();
+    },
+
+    updateFavStatus(post) {
+        let favStatus = !!FavService.getPost(post.id);
+        this.setState({favStatus: favStatus});
     }
 });

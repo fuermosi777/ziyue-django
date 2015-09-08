@@ -58,6 +58,7 @@ def post(request):
         post_instance = Post.objects.get(id=post_id)
         if post_instance:
             res = {
+                'id': encrypter.encode(post_instance.id),
                 'title': post_instance.title,
                 'body': post_instance.body,
                 'datetime': tools.humanize_timesince(post_instance.datetime),

@@ -17,6 +17,7 @@
     name default, 
     left-bg #282727, 
     left-text #FFFFFF, 
+    left-text-sub #AAAAAA,
     left-tint #575557, 
     mid-bg #F9F8F4, 
     mid-text #4F4F4F, 
@@ -32,6 +33,7 @@
     name standard, 
     left-bg #D4DBE2, 
     left-text #383A3B,
+    left-text-sub #8C8C8C,
     left-tint #C3CEDA,
     mid-bg #FFFFFF,
     mid-text #464646,
@@ -47,6 +49,7 @@
     name original, 
     left-bg #E5E2D2, 
     left-text #5A5548,
+    left-text-sub #AAAAAA,
     left-tint #E1DCCB,
     mid-bg #F9F8F4,
     mid-text #4F4F4F,
@@ -62,6 +65,7 @@
     name dark, 
     left-bg #383838, 
     left-text #FFFFFF,
+    left-text-sub #AAAAAA,
     left-tint #585658,
     mid-bg #414141,
     mid-text #FFFFFF,
@@ -78,17 +82,18 @@
     @name: extract(extract(@theme, 1), 2);
     @left-bg: extract(extract(@theme, 2), 2);
     @left-text: extract(extract(@theme, 3), 2);
-    @left-tint: extract(extract(@theme, 4), 2);
-    @mid-bg: extract(extract(@theme, 5), 2);
-    @mid-text: extract(extract(@theme, 6), 2);
-    @mid-text-sub: extract(extract(@theme, 7), 2);
-    @mid-tint: extract(extract(@theme, 8), 2);
-    @mid-border: extract(extract(@theme, 9), 2);
-    @right-bg: extract(extract(@theme, 10), 2);
-    @right-text: extract(extract(@theme, 11), 2);
-    @right-text-sub: extract(extract(@theme, 12), 2);
-    @right-border: extract(extract(@theme, 13), 2);
-    @right-tint: extract(extract(@theme, 14), 2);
+    @left-text-sub: extract(extract(@theme, 4), 2);
+    @left-tint: extract(extract(@theme, 5), 2);
+    @mid-bg: extract(extract(@theme, 6), 2);
+    @mid-text: extract(extract(@theme, 7), 2);
+    @mid-text-sub: extract(extract(@theme, 8), 2);
+    @mid-tint: extract(extract(@theme, 9), 2);
+    @mid-border: extract(extract(@theme, 10), 2);
+    @right-bg: extract(extract(@theme, 11), 2);
+    @right-text: extract(extract(@theme, 12), 2);
+    @right-text-sub: extract(extract(@theme, 13), 2);
+    @right-border: extract(extract(@theme, 14), 2);
+    @right-tint: extract(extract(@theme, 15), 2);
     .@{name} {
         .InfoSidebar {
             background-color: @left-bg;
@@ -108,8 +113,7 @@
                         background-color: @left-tint;
                     }
                     span.badge {
-                        background-color: @left-text;
-                        color: @left-bg;
+                        color: @left-text-sub;
                     }
                 }
             }
@@ -166,7 +170,10 @@
             .top-control {
                 background-color: @right-bg;
             }
-            .top-control .fa {
+            .top-control i {
+                &.fav-btn.active {
+                    color: #EB4234;
+                }
                 color: @right-text-sub;
                 &:hover {
                     color: @right-text;

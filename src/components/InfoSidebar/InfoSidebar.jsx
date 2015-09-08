@@ -10,6 +10,7 @@ export default React.createClass({
         onThemeSelected: React.PropTypes.func,
         onReadLaterSelect: React.PropTypes.func,
         readLaterNumber: React.PropTypes.number,
+        favNumber: React.PropTypes.number,
         readingMode: React.PropTypes.bool
     },
 
@@ -48,6 +49,7 @@ export default React.createClass({
                 <div className="InfoSidebar-title" onClick={this.handlePersonalBtnClick}><i className={this.state.isPersonalOpen ? "ion-android-arrow-dropdown" : "ion-android-arrow-dropright"}></i>个人</div>
                 {this.state.isPersonalOpen ? <ul className="InfoSidebar-categorys animated fadeInLeft">
                     <li onClick={this.handleReadLaterBtnClick}>稍后阅读 <span className="badge">{this.props.readLaterNumber}</span></li>
+                    <li onClick={this.handleFavBtnClick}>收藏文章 <span className="badge">{this.props.favNumber}</span></li>
                 </ul> : ''}
 
                 <div className="InfoSidebar-info">
@@ -96,5 +98,9 @@ export default React.createClass({
 
     handleReadLaterBtnClick() {
         this.props.onReadLaterSelect();
+    },
+
+    handleFavBtnClick() {
+        this.props.onFavSelect();
     }
 });
