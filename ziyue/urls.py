@@ -17,6 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 import api.views
 import web.views
+import log.views
 
 urlpatterns = [
     url(r'^gever/admin/', include(admin.site.urls)),
@@ -33,4 +34,8 @@ urlpatterns += [
     url(r'^(?P<category_slug>\w+)$', web.views.category),
     url(r'^post/(?P<post_id>\w+)$', web.views.post),
     url(r'^vendor/(?P<vendor_id>\w+)$', web.views.vendor),
+]
+
+urlpatterns += [
+    url(r'^log/log/$', log.views.log),
 ]

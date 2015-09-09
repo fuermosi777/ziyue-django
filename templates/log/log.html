@@ -1,0 +1,15 @@
+{% extends "log/base.html" %}
+{% block content %}
+<ul>
+{% for v in vendors %}
+    <li>
+    {{ v.name }}
+        <ul>
+        {% for p in v.posts %}
+            <li>{{ p.title }} {{ p.datetime }}</li>
+        {% endfor %}
+        </ul>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
