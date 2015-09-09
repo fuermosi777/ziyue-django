@@ -1,4 +1,4 @@
-@import "../Base/Base";
+@import (reference) "../Base/Base";
 .PostList {
     height: 100%;
     width: 260px;
@@ -7,12 +7,12 @@
     left: 220px;
     z-index: 1;
     padding-bottom: 40px;
+    -webkit-overflow-scrolling: touch;
     @media @xs {
         left: 100%;
         width: 100%;
         margin-top: 64px;
         height: ~'calc(100% - 64px)';
-        -webkit-overflow-scrolling: touch;
     }
     @media @sm {
         left: 180px;
@@ -32,7 +32,6 @@
         li {
             list-style: none;
             padding: 15px 15px;
-            cursor: pointer;
             .top {
                 margin-bottom: 5px;
                 span.title {

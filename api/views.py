@@ -26,7 +26,7 @@ def posts(request):
             posts = Post.objects.filter(vendor__is_alive=True, vendor__categorys__in=[category_instance])
         if vendor_id:
             posts = Post.objects.filter(vendor__is_alive=True, vendor_id=vendor_id)
-        posts = posts.order_by('-datetime')[start:start+15]
+        posts = posts.order_by('-datetime')[start:start+30]
         res = {
             'data': tools.wrap_posts(posts),
             'hasNext': True,

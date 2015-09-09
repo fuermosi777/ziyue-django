@@ -205,7 +205,7 @@ export default React.createClass({
         ContentService.getVendorPosts(vid).then((res) => {
             this.setState({posts: res.data});
             this.replaceWith('vendor', {vid: vid});
-            document.title = `${res.name}`;
+            document.title = `子阅 - ${res.name}`;
             Tracker.trackVendorPageView(vid);
             this.setState({postListIsLoading: false});
         });

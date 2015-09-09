@@ -4,6 +4,7 @@ import Spinner from '../Spinner/Spinner.jsx';
 import Tracker from '../../utils/Tracker.js';
 import Basic from '../../utils/Basic.js';
 import ReadLaterService from '../../services/ReadLaterService.js';
+import $ from 'jquery';
 
 const LENGTH = 25;
 
@@ -35,6 +36,10 @@ export default React.createClass({
 
     componentWillUnmount() {
         window.removeEventListener('keydown', this.handleKeyDown);
+    },
+
+    componentDidMount() {
+    
     },
 
     render() {

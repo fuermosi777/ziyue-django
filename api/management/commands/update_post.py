@@ -17,7 +17,7 @@ class Command(BaseCommand):
     help = ""
     args = '<test>'
     def handle(self, *args, **options):
-        vendors = Vendor.objects.all()
+        vendors = Vendor.objects.filter(is_alive=True)
         if args:
             if args[0] == 'test':
                 for v in vendors:
