@@ -203,7 +203,7 @@ export default React.createClass({
     handleVendorSelected(vid) {
         this.setState({vendorId: vid, postListIsLoading: true});
         ContentService.getVendorPosts(vid).then((res) => {
-            this.setState({posts: res.data});
+            this.setState({posts: res.data, postListHasNext: res.hasNext});
             this.replaceWith('vendor', {vid: vid});
             document.title = `子阅 - ${res.name}`;
             Tracker.trackVendorPageView(vid);

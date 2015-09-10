@@ -39,7 +39,7 @@ export default React.createClass({
     },
 
     componentDidMount() {
-    
+        window.addEventListener('mousewheel', () => {});
     },
 
     render() {

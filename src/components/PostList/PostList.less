@@ -5,9 +5,8 @@
     position: absolute;
     top: 0;
     left: 220px;
-    z-index: 1;
+    z-index: 0;
     padding-bottom: 40px;
-    -webkit-overflow-scrolling: touch;
     @media @xs {
         left: 100%;
         width: 100%;
@@ -26,6 +25,7 @@
     &-list {
         display: block;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         height: 100%;
         animation-duration: 0.2s;
         -webkit-animation-duration: 0.2s;
