@@ -55,7 +55,7 @@ export default React.createClass({
                 <div className="InfoSidebar-info">
                     <i className={'fa ' + (this.state.isSettingOpen ? 'ion-chevron-down' : 'ion-chevron-up') + ' setting'} onClick={this.handleArrowClick}></i>
                     <span className="name">子阅 ziyue.io</span>
-                    <i className="ion-help-circled question" onClick={this.handleQuestionClick}></i>
+                    <a href="http://about.ziyue.io" target="_blank"><i className="ion-help-circled question"></i></a>
                 </div>
                 {this.state.isSettingOpen ? 
                     <ul className="InfoSidebar-panel" style={{height: (THEMES.length + 1) * 30}}>
@@ -78,10 +78,6 @@ export default React.createClass({
 
     handleArrowClick() {
         this.setState({'isSettingOpen': !this.state.isSettingOpen});
-    },
-
-    handleQuestionClick() {
-        window.location.href = "mailto:hello@ziyue.io?subject=意见/建议/问题&body=如有任何疑问，请联系我们吧！";
     },
 
     handleThemeItemClick(t) {
