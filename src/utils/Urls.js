@@ -1,4 +1,4 @@
-let urlPrefix = ZYIsDev ? 'http://localhost:8000' : '';
+let urlPrefix = ZYIsDev ? 'http://localhost:8000' : 'http://ziyue.io';
 
 export default {
     posts(category, start=0) {

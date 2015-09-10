@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.dev.js --hot --inline --colors --progress  --history-api-fallback",
     "build": "webpack --config webpack.config.prod.js -p --progress --colors",
+    "build-mac": "webpack --config webpack.config.mac.js -p --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
