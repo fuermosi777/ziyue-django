@@ -6,7 +6,7 @@ def crawl():
     res = []
     for l in storer.filter_list(list):
         soup = basic.load_soup(l)
-        title = soup.select('title')[0]
+        title = soup.select('h1.post-title')[0]
         contents = soup.select('.article-content')
         body = ''
         for c in contents:
