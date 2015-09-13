@@ -39,5 +39,6 @@ def wrap_posts(post_instance):
             'name': p.vendor.name,
             'avatar': p.vendor.avatar.url,
             'url': p.vendor.url,
+            'authorized': p.vendor.authorizedBlog,
         },
     } for p in post_instance]

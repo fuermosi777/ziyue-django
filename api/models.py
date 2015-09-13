@@ -26,7 +26,7 @@ class Vendor(models.Model):
     categorys = models.ManyToManyField(Category)
     is_alive = models.BooleanField(default=True)
     desc = models.TextField()
-    authroizedBlog = models.BooleanField(default=False)
+    authorizedBlog = models.BooleanField(default=False)
     def __str__(self):
         return self.name
 

@@ -21,7 +21,7 @@ export default React.createClass({
                 <li key={i}>
                     <div className="content" onClick={this.handleVendorClick.bind(this, item)}>
                         <img src={item.avatar} className="avatar"/>
-                        <div className="name">{item.name}</div>
+                        <div className="name">{item.name} {item.authorized ? <i className="ion-android-bookmark ribbon"/> : ''} {item.authorized ? <span className="note">授权博客</span> : ''}</div>
                         <div className="bottom">{item.desc}</div>
                     </div>
                 </li>

@@ -67,6 +67,7 @@ def post(request):
                     'name': post_instance.vendor.name,
                     'avatar': post_instance.vendor.avatar.url,
                     'url': post_instance.vendor.url,
+                    'authorized': post_instance.vendor.authorizedBlog,
                 },
             }
             return JsonResponse(res, safe=False)
@@ -105,6 +106,7 @@ def vendors(request):
                 'url': v.url,
                 'avatar': v.avatar.url,
                 'desc': v.desc,
+                'authorized': v.authorizedBlog,
             } for v in vendors]
             return JsonResponse(res, safe=False)
         else:
