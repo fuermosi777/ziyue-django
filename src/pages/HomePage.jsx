@@ -12,6 +12,7 @@ import FavService from '../services/FavService.js';
 import ThemeService from '../services/ThemeService.js';
 import Processor from '../utils/Processor.js';
 import Tracker from '../utils/Tracker.js';
+import Mixpanel from '../utils/Mixpanel.js';
 import Styles from './HomePage.less';
 
 export default React.createClass({
@@ -47,6 +48,8 @@ export default React.createClass({
     componentWillMount() {
         // get category from URL
         // and set to state
+        Mixpanel.trackStartApp();
+        
         if (this.isActive('category')) {
             let category = this.getParams().category || '';
             let categoryToSelect;
@@ -245,7 +248,6 @@ export default React.createClass({
         // from infosidebar view
         let postsObject = ReadLaterService.getPosts();
         document.title = `子阅 - 稍后阅读`;
-        Tracker.trackReadLater();
         this.setState({posts: postsObject, postListHasNext: false, postListIsLoading: false});
     },
 
@@ -268,7 +270,6 @@ export default React.createClass({
         // from infosiderbar view
         let postsObject = FavService.getPosts();
         document.title = `子阅 - 收藏文章`;
-        Tracker.trackFav();
         this.setState({posts: postsObject, postListHasNext: false, postListIsLoading: false});
     },
 

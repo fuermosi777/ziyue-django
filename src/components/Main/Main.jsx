@@ -1,7 +1,8 @@
 import React from 'react';
 import Styles from './Main.less';
 import Spinner from '../Spinner/Spinner.jsx';
-import Tracker from '../../utils/Tracker.js';
+import ScrollView from '../ScrollView/ScrollView.jsx';
+import Mixpanel from '../../utils/Mixpanel.js';
 import FavService from '../../services/FavService.js';
 import $ from 'jquery';
 
@@ -21,16 +22,6 @@ export default React.createClass({
 		};
 	},
 
-    readSourceButton: null,
-
-    componentDidMount() {
-        document.body.addEventListener('click', this.handleBodyClick);
-    },
-
-    componentWillUnmount() {
-        document.body.removeEventListener('click', this.handleBodyClick);
-    },
-
     render() {
         let RecommendPosts = this.props.recommendPosts.map((item, i) => {
             return (
@@ -44,7 +35,7 @@ export default React.createClass({
                 <div className="Main-wrapper">
                     {this.props.isLoading ? <Spinner/> : ''}
                     {/* post */}
-                    <div className="post-wrapper">
+                    <ScrollView>
         	            {!this.props.isLoading && this.props.post ? <div className="post-title">{this.props.post.title}</div> : ''}
                         {!this.props.isLoading && this.props.post ? <div className="post-info">
                             <img className="avatar" src={this.props.post.vendor.avatar}/>
@@ -52,13 +43,13 @@ export default React.createClass({
                             <span className="date">{this.props.post.datetime}</span>
                         </div> : ''}
                     	{!this.props.isLoading && this.props.post ? <div className="post" dangerouslySetInnerHTML={{__html: this.props.post.body}} /> : ''}
-                        {!this.props.isLoading && this.props.post ? <a href={this.props.post.source} className="read-source-button" target="_blank">阅读原文</a> : ''}
+                        {!this.props.isLoading && this.props.post ? <a href={this.props.post.source} className="read-source-button" target="_blank" onClick={this.handleReadSource}>阅读原文</a> : ''}
                         {!this.props.isLoading && this.props.post ? 
                             <ul className="recommend">
                                 <li className="recommend-title">相关阅读</li>
                                 {RecommendPosts}
                             </ul> : ''}
-                    </div>
+                    </ScrollView>
                     {/* control */}
                     {!this.props.isLoading && this.props.post ? <div className="top-control">
                         <i className="ion-android-close close-btn" onClick={this.handleCloseClick}></i>
@@ -66,7 +57,7 @@ export default React.createClass({
                     </div> : ''}
                     {!this.props.isLoading && this.props.post ? <div className="bottom-control">
                         <i className={"expand-btn " + (this.props.readingMode ? "ion-android-contract" : "ion-android-expand")} onClick={this.handleExpandBtnClick}></i>
-                        <a href={this.props.post.source} target="_blank" className="source-link">阅读原文 <i className="fa fa-share"></i></a>
+                        <a href={this.props.post.source} target="_blank" className="source-link" onClick={this.handleReadSource}>阅读原文 <i className="fa fa-share"></i></a>
                     </div> : ''}
                 </div>
             </div> 
@@ -84,10 +75,8 @@ export default React.createClass({
         return true;
     },
 
-    handleBodyClick(e) {
-        if (e.target.id === 'js_view_source') {
-            Tracker.trackReadSource(this.props.post.id);
-        }
+    handleReadSource() {
+        Mixpanel.trackReadSource(this.props.post.id, this.props.post.title);
     },
 
     handleCloseClick() {

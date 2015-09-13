@@ -1,7 +1,8 @@
 import React from 'react';
 import Styles from './PostList.less';
 import Spinner from '../Spinner/Spinner.jsx';
-import Tracker from '../../utils/Tracker.js';
+import ScrollView from '../ScrollView/ScrollView.jsx';
+import Mixpanel from '../../utils/Mixpanel.js';
 import Basic from '../../utils/Basic.js';
 import ReadLaterService from '../../services/ReadLaterService.js';
 import $ from 'jquery';
@@ -55,11 +56,12 @@ export default React.createClass({
         return (            
             <div className={"PostList " + (this.props.readingMode ? 'reading' : '')}>
                 {this.props.isLoading ? <Spinner/> : ''}
-                {this.props.isLoading ? '' : <ul className="PostList-list animated fadeInDown">
+                {this.props.isLoading ? '' : 
+                <ScrollView onApproachingTop={this.handleScrollApproachingTop} onApproachingBottom={this.handleScrollApproachingBottom}>
                     {this.props.start > 0 ? <li onClick={this.handlePrevClick}><span className="more">上一页</span></li> : ''}
                     {PostList}
                     {this.props.hasNext ? <li onClick={this.handleNextClick}><span className="more">下一页</span></li> : ''}
-                </ul>}
+                </ScrollView>}
                 <div className="PostList-control">
                     {this.state.shouldShowSearchInput ? <input className="search-input" ref="searchInput" onBlur={this.handleSearchInputBlur} onChange={this.handleSearchInputChange} onKeyDown={this.handleSearchInputKeyDown}/> : ''}
                     {this.state.shouldShowSearchInput && !this.state.keyword ? <label className="search-input-label">搜索文章</label> : ''}
@@ -69,9 +71,15 @@ export default React.createClass({
         );
     },
 
+    handleScrollApproachingTop() {
+    },
+
+    handleScrollApproachingBottom() {
+    },
+
     handlePostClick(post) {
         this.props.onPostSelected(post.id);
-        Tracker.trackPostClickEvent(post.id);
+        Mixpanel.trackPostClickEvent(post.id, post.title);
     },
 
     handleNextClick() {

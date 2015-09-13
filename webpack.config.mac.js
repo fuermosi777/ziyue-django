@@ -6,7 +6,7 @@ module.exports = {
         './src/entry.mac.jsx'
     ],
     output: {
-        path: __dirname + '/build/mac',
+        path: '/Users/hao/workspace/ziyue-mac/public',
         filename: 'bundle.js'
     },
     module: {

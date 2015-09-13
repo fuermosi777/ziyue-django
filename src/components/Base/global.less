@@ -3,6 +3,11 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     //-webkit-backface-visibility: hidden;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
 }
 
 html {
@@ -11,7 +16,7 @@ html {
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     height: 100%;
-    //overflow: hidden;
+    overflow: hidden;
 }
 
 body {
@@ -21,6 +26,7 @@ body {
     margin: 0;
     height: 100%;
     -webkit-overflow-scrolling: touch;
+    overflow: hidden;
     @media @xs {
         overflow: hidden;
     }

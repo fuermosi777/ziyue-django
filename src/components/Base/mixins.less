@@ -5,11 +5,11 @@
     background-size: cover;
 }
 
-.transition(@time: 0.5s, @easing: ease-in-out) {
-    -webkit-transition: all @time @easing;
-    -moz-transition: all @time @easing;
-    -o-transition: all @time @easing;
-    transition: all @time @easing;
+.transition(@time: 0.5s, @easing: ease-in-out, @type: all) {
+    -webkit-transition: @type @time @easing;
+    -moz-transition: @type @time @easing;
+    -o-transition: @type @time @easing;
+    transition: @type @time @easing;
 }
 
 .gradient-vertical (@top-color, @bottom-color) {

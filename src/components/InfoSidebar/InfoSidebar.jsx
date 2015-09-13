@@ -1,6 +1,6 @@
 import React from 'react';
 import Styles from './InfoSidebar.less';
-import Tracker from '../../utils/Tracker.js';
+import Mixpanel from '../../utils/Mixpanel.js';
 import {THEMES} from '../../utils/Constant.js';
 
 export default React.createClass({
@@ -69,7 +69,7 @@ export default React.createClass({
 
     handleCategoryClick(e) {
         this.handleCategorySelect(e);
-        Tracker.trackCategoryClickEvent(e.category);
+        Mixpanel.trackCategoryClickEvent(e.category);
     },
 
     handleCategorySelect(category) {

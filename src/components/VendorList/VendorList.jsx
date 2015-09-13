@@ -1,6 +1,8 @@
 import React from 'react';
 import Stylels from './VendorList.less';
 import Spinner from '../Spinner/Spinner.jsx';
+import ScrollView from '../ScrollView/ScrollView.jsx';
+import Mixpanel from '../../utils/Mixpanel.js';
 
 export default React.createClass({
     propsTypes: {
@@ -27,11 +29,13 @@ export default React.createClass({
         });
         return (
             <div className="VendorList">
-                <div className="VendorList-wrapper">
-                    {this.props.isLoading ? <Spinner/> : ''}
-                    {this.props.isLoading ? '' : <ul className="VendorList-list">
-                        {VendorList}
-                    </ul>}
+                <div className="wrapper">
+                    <ScrollView>
+                        {this.props.isLoading ? <Spinner/> : ''}
+                        {this.props.isLoading ? '' : <ul className="VendorList-list">
+                            {VendorList}
+                        </ul>}
+                    </ScrollView>
                 </div>
             </div>
         );
@@ -42,5 +46,6 @@ export default React.createClass({
 
     handleVendorClick(vendor) {
         this.props.onVendorSelected(vendor.id);
+        Mixpanel.trackVendorClickEvent(vendor.id);
     }
 });

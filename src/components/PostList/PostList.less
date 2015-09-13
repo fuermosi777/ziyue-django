@@ -22,50 +22,42 @@
             left: 0;
         }
     }
-    &-list {
-        display: block;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        height: 100%;
-        animation-duration: 0.2s;
-        -webkit-animation-duration: 0.2s;
-        li {
-            list-style: none;
-            padding: 15px 15px;
-            cursor: pointer;
-            .top {
-                margin-bottom: 5px;
-                span.title {
-                    font-size: 1.4rem;
-                }
-            }
-            .bottom {
-                font-size: 1.2rem;
-                img.avatar {
-                    width: 20px;
-                    height: 20px;
-                    border-radius: 50%;
-                    vertical-align: middle;
-                    margin-right: 5px;
-                }
-                span.author {}
-                span.date {
-                    float: right;
-                }
-                i {
-                    margin-left: 5px;
-                    float: right;
-                    font-size: 1.6rem;
-                    vertical-align: middle;
-                    line-height: 1;
-                    &.active {
-                        color: #8AB759;
-                    }
-                }
-            }
-            span.more {
+    li {
+        list-style: none;
+        padding: 15px 15px;
+        cursor: pointer;
+        .top {
+            margin-bottom: 5px;
+            span.title {
                 font-size: 1.4rem;
             }
+        }
+        .bottom {
+            font-size: 1.2rem;
+            img.avatar {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+            span.author {}
+            span.date {
+                float: right;
+            }
+            i {
+                margin-left: 5px;
+                float: right;
+                font-size: 1.6rem;
+                vertical-align: middle;
+                line-height: 1;
+                &.active {
+                    color: #8AB759;
+                }
+            }
+        }
+        span.more {
+            font-size: 1.4rem;
         }
     }
     &-control {
