@@ -1,5 +1,6 @@
 import React from 'react';
 import Styles from './InfoSidebar.less';
+import ScrollView from '../ScrollView/ScrollView.jsx';
 import Mixpanel from '../../utils/Mixpanel.js';
 import {THEMES} from '../../utils/Constant.js';
 
@@ -41,16 +42,18 @@ export default React.createClass({
 
         return (
             <div className={"InfoSidebar " + (this.props.readingMode ? 'reading' : '')}>
-                <div className="InfoSidebar-title" onClick={this.handleDiscoverBtnClick}><i className={this.state.isCategoryOpen ? "ion-android-arrow-dropdown" : "ion-android-arrow-dropright"}></i>发现</div>
-                {this.state.isCategoryOpen ? <ul className="InfoSidebar-categorys animated fadeInLeft">
-                    {Categorys}
-                </ul> : ''}
+                <ScrollView>
+                    <div className="InfoSidebar-title" onClick={this.handleDiscoverBtnClick}><i className={this.state.isCategoryOpen ? "ion-android-arrow-dropdown" : "ion-android-arrow-dropright"}></i>发现</div>
+                    {this.state.isCategoryOpen ? <ul className="InfoSidebar-categorys animated fadeInLeft">
+                        {Categorys}
+                    </ul> : ''}
 
-                <div className="InfoSidebar-title" onClick={this.handlePersonalBtnClick}><i className={this.state.isPersonalOpen ? "ion-android-arrow-dropdown" : "ion-android-arrow-dropright"}></i>个人</div>
-                {this.state.isPersonalOpen ? <ul className="InfoSidebar-categorys animated fadeInLeft">
-                    <li onClick={this.handleReadLaterBtnClick}>稍后阅读 <span className="badge">{this.props.readLaterNumber}</span></li>
-                    <li onClick={this.handleFavBtnClick}>收藏文章 <span className="badge">{this.props.favNumber}</span></li>
-                </ul> : ''}
+                    <div className="InfoSidebar-title" onClick={this.handlePersonalBtnClick}><i className={this.state.isPersonalOpen ? "ion-android-arrow-dropdown" : "ion-android-arrow-dropright"}></i>个人</div>
+                    {this.state.isPersonalOpen ? <ul className="InfoSidebar-categorys animated fadeInLeft">
+                        <li onClick={this.handleReadLaterBtnClick}>稍后阅读 <span className="badge">{this.props.readLaterNumber}</span></li>
+                        <li onClick={this.handleFavBtnClick}>收藏文章 <span className="badge">{this.props.favNumber}</span></li>
+                    </ul> : ''}
+                </ScrollView>
 
                 <div className="InfoSidebar-info">
                     <i className={'fa ' + (this.state.isSettingOpen ? 'ion-chevron-down' : 'ion-chevron-up') + ' setting'} onClick={this.handleArrowClick}></i>
