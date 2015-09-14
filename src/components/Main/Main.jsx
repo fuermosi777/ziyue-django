@@ -22,6 +22,14 @@ export default React.createClass({
 		};
 	},
 
+    componentDidMount() {
+        // convert all links to target blank open
+        let links = React.findDOMNode(this.refs.post).querySelectorAll('a');
+        Array.prototype.map.call(links, (item) => {
+            item.target = "_blank";
+        });
+    },
+
     render() {
         let RecommendPosts = this.props.recommendPosts.map((item, i) => {
             return (
@@ -42,7 +50,7 @@ export default React.createClass({
                             <span className="vendor"><a href={this.props.post.vendor.url} target="_blank">{this.props.post.vendor.name}</a></span>
                             <span className="date">{this.props.post.datetime}</span>
                         </div> : ''}
-                    	{!this.props.isLoading && this.props.post ? <div className="post" dangerouslySetInnerHTML={{__html: this.props.post.body}} /> : ''}
+                    	{!this.props.isLoading && this.props.post ? <div className="post" ref="post" dangerouslySetInnerHTML={{__html: this.props.post.body}} /> : ''}
                         {!this.props.isLoading && this.props.post ? <a href={this.props.post.source} className="read-source-button" target="_blank" onClick={this.handleReadSource}>阅读原文</a> : ''}
                         {!this.props.isLoading && this.props.post ? 
                             <ul className="recommend">
