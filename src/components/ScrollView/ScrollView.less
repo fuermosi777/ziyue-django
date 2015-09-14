@@ -15,6 +15,7 @@
             width: 6px;
             left: 1px;
             border-radius: 3px;
+            z-index: 1;
             .transition(@time: 0.2s, @type: background-color);
             &.hide {
                 background-color: rgba(0, 0, 0, 0);
@@ -31,10 +32,11 @@
     .scroller {
         overflow-y: auto;
         height: 100%;
-        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: -20px;
         padding-right: 20px;
-        box-sizing: content-box;
-        -moz-box-sizing: content-box;
-        -webkit-box-sizing: content-box;
     }
 }
