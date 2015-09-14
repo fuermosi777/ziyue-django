@@ -17,7 +17,7 @@ def log(request):
         now = datetime.now()
         for x in range(1, 10):
             dates.append(now - timedelta(days=x))
-        vendors = Vendor.objects.all().prefetch_related('post_set')[start:start+50]
+        vendors = Vendor.objects.all().prefetch_related('post_set')
 
         for v in vendors:
             posts = list(v.post_set.all())
@@ -30,7 +30,6 @@ def log(request):
                 for p in posts:
                     if p.datetime.year == val.year and p.datetime.month == val.month and p.datetime.day == val.day:
                         v.data[idx]['num'] += 1
-
         context = {
             'vendors': vendors,
         }

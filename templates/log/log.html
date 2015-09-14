@@ -1,34 +1,24 @@
 {% extends "log/base.html" %} {% block content %}
-<script>
-var options = {
-    scaleShowGridLines: true,
-};
-</script>
-<ul>
+<table style="width:100%" border="1">
+    <tr>
+        <td>Vendor</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+    </tr>
     {% for v in vendors %}
-    <li style="display:block; margin-bottom: 30px;">
-        <p><a href="{{ v.url }}">{{ v.name }}</a><p>
-        <canvas id="chart-{{ v.id }}" width="960" height="100"></canvas>
-        <script>
-        (function() {
-            var ctx = document.getElementById("chart-{{ v.id }}").getContext("2d");
-            var data = {
-                labels: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-                datasets: [{
-                    label: "My First dataset",
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: [{% for d in v.data reversed %}{{ d.num }}, {% endfor %}]
-                }]
-            };
-            var myLineChart = new Chart(ctx).Line(data, options);
-        }());
-        </script>
-    </li>
+    <tr>
+        <td><a href="{{ v.url }}">{{ v.name }}></a></td>
+        {% for d in v.data %}
+        <td bgcolor="{% if d.num > 0 %}green{% else %}red{% endif %}">{{ d.num }}</td>
+        {% endfor %}
+    </tr>
     {% endfor %}
-</ul>
+</table>
 {% endblock %}

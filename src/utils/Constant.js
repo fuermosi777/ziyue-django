@@ -15,6 +15,9 @@ export default {
         category: 'productdesign',
         name: '产品设计'
     }, {
+        category: 'tech',
+        name: '技术综合'
+    }, {
         category: 'frontend',
         name: '前端开发'
     }, {

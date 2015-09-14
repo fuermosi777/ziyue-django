@@ -51,6 +51,8 @@ def hard_scrape_list(url, list_select, list_url_pre):
 
 def hard_scrape_post(url, title_select, body_select, remove_tags):
     soup = load_soup(url)
+    title = soup.select(title_select)[0].get_text()
+    text_info = soup.select(body_select)[0]
     try:
         title = soup.select(title_select)[0].get_text()
         text_info = soup.select(body_select)[0]
