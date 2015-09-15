@@ -51,9 +51,9 @@ export default React.createClass({
                 return it.firstIndex === i;
             });
             return (
-                <div>
+                <div key={i}>
                     {findFirst.length > 0 ? <span className="date-mark">{item.date}</span> : null}
-                    <li key={i} onClick={this.handlePostClick.bind(this, item)} className={this.props.selectedPostId && this.props.selectedPostId === item.id ? 'active' : ''}>
+                    <li onClick={this.handlePostClick.bind(this, item)} className={this.props.selectedPostId && this.props.selectedPostId === item.id ? 'active' : ''}>
                         <div className="top"><span className="title">{item.title}</span></div>
                         <div className="bottom"><img className="avatar" src={item.vendor.avatar}/><span className="author">{item.vendor.name}</span><i className={this.state.readLaterStatuses[i] ? "ion-ios-book active": "ion-ios-book-outline"} onClick={this.handleReadLaterBtn.bind(this, item)}></i><span className="date">{item.datetime}</span></div>
                     </li>

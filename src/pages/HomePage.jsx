@@ -187,7 +187,7 @@ export default React.createClass({
         let getPostPromise = ContentService.getPost(pid);
         let getRecommendPostsPromise = ContentService.getRecommendPosts(pid);
 
-        Promise.all([getPostPromise, getRecommendPostsPromise]).then((res) =>{
+        Promise.all([getPostPromise, getRecommendPostsPromise]).then((res) => {
             let resPost = res[0];
             let resRecommendPosts = res[1];
             this.replaceWith('post', {pid: pid});

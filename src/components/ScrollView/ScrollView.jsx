@@ -4,7 +4,6 @@ import Styles from './ScrollView.less';
 export default React.createClass({
     getInitialState() {
         return {
-            height: 0,
             handlerScrollTop: 0,
             handlerHide: true
         };
@@ -13,6 +12,7 @@ export default React.createClass({
     handlerHider: null,
     scrollHandler: null,
     lastPos: 0,
+    height: 0,
 
     componentDidMount() {
         window.addEventListener('resize', this.handleResize);
@@ -22,7 +22,7 @@ export default React.createClass({
     },
 
     componentWillUnmount() {
-        window.removeEventListener('resize', this.removeResize);  
+        window.removeEventListener('resize', this.handleResize);  
         document.removeEventListener('mousemove', this.handleHandlerMouseMove);
         document.removeEventListener('mouseup', this.handleHandlerMouseUp);
     },
@@ -43,7 +43,7 @@ export default React.createClass({
 
     handleScroll(e) {
         clearTimeout(this.handlerHider);
-        let pos = e.target.scrollTop / (e.target.scrollHeight- this.state.height) * 0.8;
+        let pos = e.target.scrollTop / (e.target.scrollHeight- this.height) * 0.8;
         this.setState({
             handlerScrollTop: pos * 100,
             handlerHide: false
@@ -76,7 +76,7 @@ export default React.createClass({
 
     handleHandlerMouseMove(e) {
         if (this.scrollHandler) {
-            let pos = (e.pageY) / this.state.height;
+            let pos = (e.pageY) / this.height;
             pos = (pos < 0 ? 0 : (pos > 0.8 ? 0.8 : pos)) * 100;
             React.findDOMNode(this.refs.scroller).scrollTop = pos * React.findDOMNode(this.refs.scroller).scrollHeight / 100;
         }
@@ -91,7 +91,7 @@ export default React.createClass({
     },
 
     updateHeight() {
-        this.setState({height: React.findDOMNode(this).offsetHeight});  
+        this.height = React.findDOMNode(this).offsetHeight;
     }
 
 });
