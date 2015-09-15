@@ -19,6 +19,7 @@
     left-text #FFFFFF, 
     left-text-sub #AAAAAA,
     left-tint #575557, 
+    left-border #282727,
     mid-bg #F9F8F4, 
     mid-text #4F4F4F, 
     mid-text-sub #AAAAAA, 
@@ -27,19 +28,37 @@
     right-bg #F7F7F7, 
     right-text #4F4F4F, 
     right-text-sub #AAAAAA, 
-    right-border #DEDBCD, 
+    right-border #EBEAE6, 
     right-tint #F0EEE8;
+@white: 
+    name white, 
+    left-bg white, 
+    left-text #000, 
+    left-text-sub #AAAAAA,
+    left-tint #F5F5F5, 
+    left-border #F5F5F5,
+    mid-bg white, 
+    mid-text #000, 
+    mid-text-sub #AAAAAA, 
+    mid-tint #F5F5F5, 
+    mid-border #F5F5F5, 
+    right-bg white, 
+    right-text #000, 
+    right-text-sub #AAAAAA, 
+    right-border #F5F5F5, 
+    right-tint #F5F5F5;
 @standard:
     name standard, 
     left-bg #D4DBE2, 
     left-text #383A3B,
     left-text-sub #8C8C8C,
     left-tint #C3CEDA,
+    left-border #D4DBE2,
     mid-bg #FFFFFF,
     mid-text #464646,
     mid-text-sub #8E8E8E,
     mid-tint #F8F8FA,
-    mid-border #CFD4DA,
+    mid-border #F1F1F1,
     right-bg #FFFFFF,
     right-text #464646,
     right-text-sub #8E8E8E,
@@ -51,6 +70,7 @@
     left-text #5A5548,
     left-text-sub #AAAAAA,
     left-tint #E1DCCB,
+    left-border #E5E2D2,
     mid-bg #F9F8F4,
     mid-text #4F4F4F,
     mid-text-sub #AAAAAA,
@@ -67,6 +87,7 @@
     left-text #FFFFFF,
     left-text-sub #AAAAAA,
     left-tint #585658,
+    left-border #383838,
     mid-bg #414141,
     mid-text #FFFFFF,
     mid-text-sub #979697,
@@ -80,23 +101,28 @@
 
 .createTheme(@theme) {
     @name: extract(extract(@theme, 1), 2);
+    // left
     @left-bg: extract(extract(@theme, 2), 2);
     @left-text: extract(extract(@theme, 3), 2);
     @left-text-sub: extract(extract(@theme, 4), 2);
     @left-tint: extract(extract(@theme, 5), 2);
-    @mid-bg: extract(extract(@theme, 6), 2);
-    @mid-text: extract(extract(@theme, 7), 2);
-    @mid-text-sub: extract(extract(@theme, 8), 2);
-    @mid-tint: extract(extract(@theme, 9), 2);
-    @mid-border: extract(extract(@theme, 10), 2);
-    @right-bg: extract(extract(@theme, 11), 2);
-    @right-text: extract(extract(@theme, 12), 2);
-    @right-text-sub: extract(extract(@theme, 13), 2);
-    @right-border: extract(extract(@theme, 14), 2);
-    @right-tint: extract(extract(@theme, 15), 2);
+    @left-border: extract(extract(@theme, 6), 2);
+    // mid
+    @mid-bg: extract(extract(@theme, 7), 2);
+    @mid-text: extract(extract(@theme, 8), 2);
+    @mid-text-sub: extract(extract(@theme, 9), 2);
+    @mid-tint: extract(extract(@theme, 10), 2);
+    @mid-border: extract(extract(@theme, 11), 2);
+    // right
+    @right-bg: extract(extract(@theme, 12), 2);
+    @right-text: extract(extract(@theme, 13), 2);
+    @right-text-sub: extract(extract(@theme, 14), 2);
+    @right-border: extract(extract(@theme, 15), 2);
+    @right-tint: extract(extract(@theme, 16), 2);
     .@{name} {
         .InfoSidebar {
             background-color: @left-bg;
+            border-right: 1px solid @left-border;
             &-title,
             &-info,
             &-panel {
@@ -126,25 +152,25 @@
         }
         .PostList {
             background-color: @mid-bg;
-            border-left: 1px solid @mid-border;
             border-right: 1px solid @mid-border;
-                li {
-                    &.active {
-                        background-color: @mid-tint;
-                    }
+            li {
+                &.active {
+                    background-color: @mid-tint;
                 }
-                .top .title {
-                    color: @mid-text;
-                }
-                .bottom {
-                    color: @mid-text-sub;
-                }
-                span.more {
-                    color: @mid-text-sub;
-                }
+            }
+            .top .title {
+                color: @mid-text;
+            }
+            .bottom {
+                color: @mid-text-sub;
+            }
+            span.more {
+                color: @mid-text-sub;
+            }
             &-control {
                 background-color: @mid-bg;
                 color: @mid-text;
+                border-top: 1px solid @mid-border;
             }
         }
         .Main {
@@ -171,6 +197,9 @@
             }
             .top-control {
                 background-color: @right-bg;
+                &.border {
+                    border-bottom: 1px solid @right-border;
+                }
             }
             .top-control i {
                 &.fav-btn.active {
@@ -193,6 +222,7 @@
             }
             .bottom-control {
                 background-color: @right-bg;
+                border-top: 1px solid @right-border;
                 opacity: 0.92;
                 i {
                     color: @right-text;
@@ -229,3 +259,4 @@
 .createTheme(@standard);
 .createTheme(@default);
 .createTheme(@dark);
+.createTheme(@white);

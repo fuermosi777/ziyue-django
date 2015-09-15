@@ -32,8 +32,9 @@ export default {
     }],
     THEMES: [
         'default',
+        'white',
         'standard',
         'original',
-        'dark',
+        'dark'
     ]
 };

@@ -58,6 +58,9 @@ export default React.createClass({
         if (pos > 0.6 && pos > this.lastPos && this.props.onApproachingBottom) {
             this.props.onApproachingBottom();
         }
+        if (this.props.onScrolling) {
+            this.props.onScrolling(pos);
+        }
         this.lastPos = pos;
     },
 

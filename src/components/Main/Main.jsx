@@ -18,7 +18,8 @@ export default React.createClass({
 
 	getInitialState() {
 		return {
-            favStatus: false
+            favStatus: false,
+            topBorderHide: true
 		};
 	},
 
@@ -43,7 +44,7 @@ export default React.createClass({
                 <div className="Main-wrapper">
                     {this.props.isLoading ? <Spinner/> : ''}
                     {/* post */}
-                    <ScrollView>
+                    <ScrollView onScrolling={this.handleScrolling}>
         	            {!this.props.isLoading && this.props.post ? <div className="post-title">{this.props.post.title}</div> : ''}
                         {!this.props.isLoading && this.props.post ? <div className="post-info">
                             <img className="avatar" src={this.props.post.vendor.avatar}/>
@@ -59,7 +60,7 @@ export default React.createClass({
                             </ul> : ''}
                     </ScrollView>
                     {/* control */}
-                    {!this.props.isLoading && this.props.post ? <div className="top-control">
+                    {!this.props.isLoading && this.props.post ? <div className={"top-control " + (this.state.topBorderHide ? '' : 'border')}>
                         <i className="ion-android-close close-btn" onClick={this.handleCloseClick}></i>
                         <i className={"fav-btn " + (this.state.favStatus ? "ion-android-favorite active" : "ion-android-favorite-outline")} onClick={this.handleFavClick.bind(this, this.props.post)}></i>
                     </div> : ''}
@@ -106,6 +107,14 @@ export default React.createClass({
 
     handleExpandBtnClick() {
         this.props.onExpandBtnClick();
+    },
+
+    handleScrolling(pos) {
+        if (pos >= 0.02) {
+            this.setState({topBorderHide: false});
+        } else {
+            this.setState({topBorderHide: true});
+        }
     },
 
     updateFavStatus(post) {

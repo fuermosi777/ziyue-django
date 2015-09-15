@@ -2,8 +2,9 @@ import $ from 'jquery';
 
 export default {
     processPost(body) {
+        console.log(body);
         body = body.replace(/[^>]style=".*?"/g, '');
-        body = body.replace(/<style>.*?<\/style>/g, '')
+        body = body.replace(/<style>(.|[\r\n])*?<\/style>/g, '');
 
         // remove <p><br></p>p> || <section><br></section>section>
         /*
