@@ -59,7 +59,7 @@ export default React.createClass({
             this.props.onApproachingBottom();
         }
         if (this.props.onScrolling) {
-            this.props.onScrolling(pos);
+            this.props.onScrolling(pos, e.target.scrollTop);
         }
         this.lastPos = pos;
     },

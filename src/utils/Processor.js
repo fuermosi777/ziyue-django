@@ -2,7 +2,6 @@ import $ from 'jquery';
 
 export default {
     processPost(body) {
-        console.log(body);
         body = body.replace(/[^>]style=".*?"/g, '');
         body = body.replace(/[^>]align=".*?"/g, '');
         body = body.replace(/<style>(.|[\r\n])*?<\/style>/g, '');

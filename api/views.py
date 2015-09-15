@@ -82,7 +82,7 @@ def post_search(request):
         return HttpResponse(status=500)
     else:
         start = int(start)
-        posts = Post.objects.filter(title__icontains=q).order_by('-datetime')[start:start+30]
+        posts = Post.objects.filter(title__icontains=q).order_by('-datetime')[start:start+50]
         if posts:
             res = {
                 'data': tools.wrap_posts(posts),
@@ -122,7 +122,7 @@ def vendor_posts(request):
         vendor_id = encrypter.decode(vendor_id)
         start = int(start)
         vendor_instance = Vendor.objects.get(id=vendor_id)
-        posts = Post.objects.filter(vendor__id=vendor_id).order_by('-datetime')[start:start+30]
+        posts = Post.objects.filter(vendor__id=vendor_id).order_by('-datetime')[start:start+50]
         if posts:
             res = {
                 'data': tools.wrap_posts(posts),

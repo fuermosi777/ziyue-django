@@ -23,12 +23,14 @@ export default React.createClass({
         return {
             shouldShowSearchInput: false,
             keyword: '',
-            readLaterStatuses: []
+            readLaterStatuses: [],
+            dateMarkers: []
         };
     },
 
     componentWillReceiveProps(props) {
         this.updateReadLaterStatuses(props.posts);
+        this.updateDateMarkers(props.posts);
     },
 
     componentWillMount() {
@@ -45,11 +47,17 @@ export default React.createClass({
 
     render() {
         let PostList = this.props.posts.map((item, i) => {
+            let findFirst = this.state.dateMarkers.filter((it) => {
+                return it.firstIndex === i;
+            });
             return (
-                <li key={i} onClick={this.handlePostClick.bind(this, item)} className={this.props.selectedPostId && this.props.selectedPostId === item.id ? 'active' : ''}>
-                    <div className="top"><span className="title">{item.title}</span></div>
-                    <div className="bottom"><img className="avatar" src={item.vendor.avatar}/><span className="author">{item.vendor.name}</span><i className={this.state.readLaterStatuses[i] ? "ion-ios-book active": "ion-ios-book-outline"} onClick={this.handleReadLaterBtn.bind(this, item)}></i><span className="date">{item.datetime}</span></div>
-                </li>
+                <div>
+                    {findFirst.length > 0 ? <span className="date-mark">{item.date}</span> : null}
+                    <li key={i} onClick={this.handlePostClick.bind(this, item)} className={this.props.selectedPostId && this.props.selectedPostId === item.id ? 'active' : ''}>
+                        <div className="top"><span className="title">{item.title}</span></div>
+                        <div className="bottom"><img className="avatar" src={item.vendor.avatar}/><span className="author">{item.vendor.name}</span><i className={this.state.readLaterStatuses[i] ? "ion-ios-book active": "ion-ios-book-outline"} onClick={this.handleReadLaterBtn.bind(this, item)}></i><span className="date">{item.datetime}</span></div>
+                    </li>
+                </div>
             );
         });
 
@@ -57,7 +65,7 @@ export default React.createClass({
             <div className={"PostList " + (this.props.readingMode ? 'reading' : '')}>
                 {this.props.isLoading ? <Spinner/> : ''}
                 {this.props.isLoading ? '' : 
-                <ScrollView onApproachingTop={this.handleScrollApproachingTop} onApproachingBottom={this.handleScrollApproachingBottom}>
+                <ScrollView>
                     {this.props.start > 0 ? <li onClick={this.handlePrevClick}><span className="more">上一页</span></li> : ''}
                     {PostList}
                     {this.props.hasNext ? <li onClick={this.handleNextClick}><span className="more">下一页</span></li> : ''}
@@ -69,12 +77,6 @@ export default React.createClass({
                 </div>
             </div>
         );
-    },
-
-    handleScrollApproachingTop() {
-    },
-
-    handleScrollApproachingBottom() {
     },
 
     handlePostClick(post) {
@@ -141,5 +143,19 @@ export default React.createClass({
             return !!ReadLaterService.getPost(item.id);
         });
         this.setState({readLaterStatuses: readLaterStatuses});
+    },
+
+    updateDateMarkers(posts) {
+        let dateMarkers = [];
+        for (let i = 0; i < posts.length; i++) {
+            let date = posts[i].date;
+            let findDate = dateMarkers.filter((item) => {
+                return item.date === date;
+            });
+            if (findDate.length <= 0) {
+                dateMarkers.push({date: date, firstIndex: i});
+            }
+        }
+        this.setState({dateMarkers: dateMarkers});
     }
 });
