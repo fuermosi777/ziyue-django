@@ -34,7 +34,7 @@ def wrap_posts(post_instance):
         'id': encrypter.encode(p.id),
         'title': p.title,
         'datetime': humanize_timesince(p.datetime),
-        'date': p.datetime.strftime('%m月%d日'),
+        'date': timezone('Asia/Shanghai').localize(p.datetime).strftime('%m月%d日'),
         'source': p.source,
         'vendor': {
             'name': p.vendor.name,
