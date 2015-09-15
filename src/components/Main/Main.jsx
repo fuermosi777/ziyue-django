@@ -45,19 +45,22 @@ export default React.createClass({
                     {this.props.isLoading ? <Spinner/> : ''}
                     {/* post */}
                     <ScrollView onScrolling={this.handleScrolling}>
-        	            {!this.props.isLoading && this.props.post ? <div className="post-title">{this.props.post.title}</div> : ''}
-                        {!this.props.isLoading && this.props.post ? <div className="post-info">
-                            <img className="avatar" src={this.props.post.vendor.avatar}/>
-                            <span className="vendor"><a href={this.props.post.vendor.url} target="_blank">{this.props.post.vendor.name}</a></span>
-                            <span className="date">{this.props.post.datetime}</span>
-                        </div> : ''}
-                    	{!this.props.isLoading && this.props.post ? <div className="post" ref="post" dangerouslySetInnerHTML={{__html: this.props.post.body}} /> : ''}
-                        {!this.props.isLoading && this.props.post ? <a href={this.props.post.source} className="read-source-button" target="_blank" onClick={this.handleReadSource}>阅读原文</a> : ''}
                         {!this.props.isLoading && this.props.post ? 
-                            <ul className="recommend">
-                                <li className="recommend-title">相关阅读</li>
-                                {RecommendPosts}
-                            </ul> : ''}
+                            <div className="post-wrapper">
+                                <div className="post-title">{this.props.post.title}</div>
+                                <div className="post-info">
+                                    <img className="avatar" src={this.props.post.vendor.avatar}/>
+                                    <span className="vendor"><a href={this.props.post.vendor.url} target="_blank">{this.props.post.vendor.name}</a></span>
+                                    <span className="date">{this.props.post.datetime}</span>
+                                </div>
+                                <div className="post" ref="post" dangerouslySetInnerHTML={{__html: this.props.post.body}} />
+                                <a href={this.props.post.source} className="read-source-button" target="_blank" onClick={this.handleReadSource}>阅读原文</a>
+                                <ul className="recommend">
+                                    <li className="recommend-title">相关阅读</li>
+                                    {RecommendPosts}
+                                </ul>
+                            </div> : ''
+                        }
                     </ScrollView>
                     {/* control */}
                     {!this.props.isLoading && this.props.post ? <div className={"top-control " + (this.state.topBorderHide ? '' : 'border')}>
