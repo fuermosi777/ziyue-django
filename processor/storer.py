@@ -7,6 +7,8 @@ import pytz
 from datetime import timedelta, datetime
 from random import randint
 from urlparse import urlparse, urljoin
+import uuid, os
+import mimetypes
 
 def store(vendor, post):
     p = Post(title=post['title'], vendor=vendor, body=post['body'], source=post['source'], datetime=random_date())
@@ -50,15 +52,17 @@ def store_post_image_from_url(vendor, image_url, post):
     }
     if urlparse(image_url).scheme == 'data':
         return image_url
-    request = urllib2.Request(image_url, headers=headers)
+    else:
+        ext = mimetypes.guess_extension(mimetypes.guess_type(image_url))
+        request = urllib2.Request(image_url, headers=headers)
 
-    img_temp = NamedTemporaryFile(delete=True)
-    img_temp.write(urllib2.urlopen(request).read())
-    img_temp.flush()
+        img_temp = NamedTemporaryFile(delete=True)
+        img_temp.write(urllib2.urlopen(request).read())
+        img_temp.flush()
 
-    p = Post_image(image=File(img_temp), post=post)
-    p.save()
-    return p.image.url
+        p = Post_image(post=post)
+        p.image.save('temp_file%s'%ext, File(img_temp))
+        return p.image.url
 
 def filter_list(list):
     # remove existing article's titles

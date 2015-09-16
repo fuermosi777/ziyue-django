@@ -46,6 +46,7 @@ def post_image_name(instance, filename):
     filename = "%s.%s" % (uuid.uuid4(), ext)
     return os.path.join('media/post_image', filename)
 
+@python_2_unicode_compatible
 class Post_image(models.Model):
     image = ProcessedImageField(upload_to=post_image_name, options={'quality': 80})
     post = models.ForeignKey(Post)
