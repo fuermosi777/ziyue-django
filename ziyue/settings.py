@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'web',
     'api',
     'log',
+    'font',
     'storages',
     'imagekit',
     'corsheaders',

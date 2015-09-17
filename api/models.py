@@ -8,7 +8,6 @@ from django.utils.encoding import python_2_unicode_compatible
 class Category(models.Model):
     name = models.CharField(max_length=30, unique=True)
     slug = models.CharField(max_length=30, unique=True)
-
     def __str__(self):
         return self.name
 
@@ -37,7 +36,6 @@ class Post(models.Model):
     datetime = models.DateTimeField()
     body = models.TextField()
     source = models.URLField(unique=True)
-
     def __str__(self):
         return self.title
 
@@ -50,6 +48,17 @@ def post_image_name(instance, filename):
 class Post_image(models.Model):
     image = ProcessedImageField(upload_to=post_image_name, options={'quality': 80})
     post = models.ForeignKey(Post)
+    def __str__(self):
+        return self.post.title
 
+def post_font_name(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (uuid.uuid4(), ext)
+    return os.path.join('media/post_font', filename)
+
+@python_2_unicode_compatible
+class Post_font(models.Model):
+    font = models.FileField(upload_to=post_font_name)
+    post = models.OneToOneField(Post)
     def __str__(self):
         return self.post.title

@@ -18,6 +18,7 @@ from django.contrib import admin
 import api.views
 import web.views
 import log.views
+import font.views
 
 urlpatterns = [
     url(r'^gever/admin/', include(admin.site.urls)),
@@ -38,4 +39,8 @@ urlpatterns += [
 
 urlpatterns += [
     url(r'^log/log/$', log.views.log),
+]
+
+urlpatterns += [
+    url(r'^font/main/$', font.views.main),
 ]
