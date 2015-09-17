@@ -5,6 +5,7 @@ import ScrollView from '../ScrollView/ScrollView.jsx';
 import Mixpanel from '../../utils/Mixpanel.js';
 import FavService from '../../services/FavService.js';
 import $ from 'jquery';
+import FontService from '../../services/FontService.js';
 
 export default React.createClass({
     propsTypes: {
@@ -28,6 +29,12 @@ export default React.createClass({
         let links = React.findDOMNode(this.refs.post).querySelectorAll('a');
         Array.prototype.map.call(links, (item) => {
             item.target = "_blank";
+        });
+        FontService.getFont('苹果设计天才艾维设计的零售店是这个样子的').then((res) => {
+            var newFontStyle = document.createElement('style');
+            newFontStyle.type = 'text/css';
+            newFontStyle.textContent = res;
+            document.head.appendChild(newFontStyle);
         });
     },
 

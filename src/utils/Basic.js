@@ -21,7 +21,6 @@ export default {
             $.ajax({
                 url: url,
                 type: 'POST',
-                dataType: 'json',
                 data: data,
                 success(res) {
                     resolve(res);
