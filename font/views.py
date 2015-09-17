@@ -10,10 +10,10 @@ from django.views.decorators.csrf import csrf_exempt
 @domain_verify
 def main(request):
     if request.method != 'POST':
-        return HttpResponse(status=404)
+        return HttpResponse(status=400)
     body = request.POST.get('body', None)
     if not body:
-        return HttpResponse(status=404)
+        return HttpResponse(status=503)
 
     font_id = uuid.uuid4()
     subprocess.call(['java', '-jar', 'font/dist/tools/sfnttool/sfnttool.jar', '-w', '-s', body, 'font/fonts/PingFangRegular.ttf', 'font/serve/%s.woff'%font_id])
