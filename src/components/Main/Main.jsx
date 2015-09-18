@@ -32,7 +32,7 @@ export default React.createClass({
         Array.prototype.map.call(links, (item) => {
             item.target = "_blank";
         });
-        FontService.getFont(this.refs.post.body).then((res) => {
+        FontService.getFont(this.props.post.body).then((res) => {
             fontStyle.type = 'text/css';
             fontStyle.textContent = res;
             document.head.appendChild(fontStyle);
