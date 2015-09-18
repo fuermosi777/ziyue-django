@@ -27,7 +27,7 @@ try:
     import local
     DEBUG = True
 except:
-    DEBUG = True
+    DEBUG = False
 
 if not DEBUG:
     CACHE_BACKEND = 'memcached://127.0.0.1:30145/?timeout=900'
