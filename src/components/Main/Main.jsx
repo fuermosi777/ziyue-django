@@ -24,18 +24,23 @@ export default React.createClass({
 		};
 	},
 
+    fontStyle: document.createElement('style'),
+
     componentDidMount() {
         // convert all links to target blank open
         let links = React.findDOMNode(this.refs.post).querySelectorAll('a');
         Array.prototype.map.call(links, (item) => {
             item.target = "_blank";
         });
-        FontService.getFont('苹果设计天才艾维设计的零售店是这个样子的').then((res) => {
-            var newFontStyle = document.createElement('style');
-            newFontStyle.type = 'text/css';
-            newFontStyle.textContent = res;
-            document.head.appendChild(newFontStyle);
+        FontService.getFont(this.refs.post.body).then((res) => {
+            fontStyle.type = 'text/css';
+            fontStyle.textContent = res;
+            document.head.appendChild(fontStyle);
         });
+    },
+
+    componentWillUnmount() {
+        fontStyle.parentNode.removeChild(fontStyle);
     },
 
     render() {
