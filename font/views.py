@@ -19,6 +19,5 @@ def main(request):
     print body
     font_id = uuid.uuid4()
     subprocess.call(['java', '-jar', 'font/dist/tools/sfnttool/sfnttool.jar', '-e', '-s', '%s'%body, 'font/fonts/PingFangRegular.ttf', 'font/serve/%s.eot'%font_id])
-    subprocess.call(['java', '-jar', 'font/dist/tools/sfnttool/sfnttool.jar', '-w', '-s', '%s'%body, 'font/fonts/PingFangRegular.ttf', 'font/serve/%s.woff'%font_id])
-    content = '@font-face {font-family: "ziyuepf"; font-style: normal; font-weight: normal; src: url(/fonts/%s.eot) format("eot"); }'%(font_id, font_id)
+    content = '@font-face {font-family: "ziyuepf"; font-style: normal; font-weight: normal; src: url(/fonts/%s.eot) format("eot"); }'%(font_id)
     return HttpResponse(content, content_type='text/css')
