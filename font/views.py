@@ -17,5 +17,5 @@ def main(request):
 
     font_id = uuid.uuid4()
     subprocess.call(['java', '-jar', 'font/dist/tools/sfnttool/sfnttool.jar', '-w', '-s', body, 'font/fonts/PingFangRegular.ttf', 'font/serve/%s.woff'%font_id])
-    content = '@font-face {font-family: "Ping-Fang"; font-style: normal; font-weight: 100; src: local("PingFang"), url(/font/%s.woff) format("woff"); }'%font_id
+    content = '@font-face {font-family: "Ping-Fang"; font-style: normal; font-weight: 100; src: local("PingFang"), url(/fonts/%s.woff) format("woff"); }'%font_id
     return HttpResponse(content, content_type='text/css')
