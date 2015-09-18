@@ -33,14 +33,14 @@ export default React.createClass({
             item.target = "_blank";
         });
         FontService.getFont(this.props.post.body).then((res) => {
-            fontStyle.type = 'text/css';
-            fontStyle.textContent = res;
-            document.head.appendChild(fontStyle);
+            this.fontStyle.type = 'text/css';
+            this.fontStyle.textContent = res;
+            document.head.appendChild(this.fontStyle);
         });
     },
 
     componentWillUnmount() {
-        fontStyle.parentNode.removeChild(fontStyle);
+        this.fontStyle.parentNode.removeChild(this.fontStyle);
     },
 
     render() {
