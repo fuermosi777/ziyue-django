@@ -17,6 +17,6 @@ def main(request):
     body = ''.join(set(body)) # rm duplicate
     body = body.encode('utf8') # encode
     font_id = uuid.uuid4()
-    subprocess.call(['java', '-jar', 'font/dist/tools/sfnttool/sfnttool.jar', '-w', '-s', '%s'%body, 'font/fonts/PingFangRegular.ttf', 'font/serve/%s.woff'%font_id])
+    subprocess.call(['java', '-jar', 'font/dist/tools/sfnttool/sfnttool.jar', '-e', '-s', '%s'%body, 'font/fonts/PingFangRegular.ttf', 'font/serve/%s.eot'%font_id])
     content = '@font-face {font-family: "Ping-Fang"; font-style: normal; font-weight: 400; src: local("PingFang"), url(/fonts/%s.woff) format("woff"); }'%font_id
     return HttpResponse(content, content_type='text/css')
