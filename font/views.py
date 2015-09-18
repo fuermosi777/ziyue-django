@@ -7,7 +7,7 @@ from api.decorators import domain_verify
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
-@domain_verify
+#@domain_verify
 def main(request):
     if request.method != 'POST':
         return HttpResponse(status=400)
