@@ -24,23 +24,12 @@ export default React.createClass({
 		};
 	},
 
-    fontStyle: document.createElement('style'),
-
     componentDidMount() {
         // convert all links to target blank open
         let links = React.findDOMNode(this.refs.post).querySelectorAll('a');
         Array.prototype.map.call(links, (item) => {
             item.target = "_blank";
         });
-        FontService.getFont(this.props.post.body).then((res) => {
-            this.fontStyle.type = 'text/css';
-            this.fontStyle.textContent = res;
-            document.head.appendChild(this.fontStyle);
-        });
-    },
-
-    componentWillUnmount() {
-        this.fontStyle.parentNode.removeChild(this.fontStyle);
     },
 
     render() {
