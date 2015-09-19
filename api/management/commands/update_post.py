@@ -32,7 +32,7 @@ class Command(BaseCommand):
             for v in vendors:
                 vendor_list.append(v)
 
-            pool = Pool(10)
+            pool = Pool(12)
             pool.map(update_vendor_post, vendor_list)
             pool.close()
             pool.join()
