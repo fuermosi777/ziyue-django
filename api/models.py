@@ -3,6 +3,7 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 import uuid, os
 from django.utils.encoding import python_2_unicode_compatible
+from api.encrypter import encode
 
 @python_2_unicode_compatible
 class Category(models.Model):
@@ -38,6 +39,8 @@ class Post(models.Model):
     source = models.URLField(unique=True)
     def __str__(self):
         return self.title
+    def get_absolute_url(self):
+        return '/post/%s'%encode(self.id)
 
 def post_image_name(instance, filename):
     ext = filename.split('.')[-1]
