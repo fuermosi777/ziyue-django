@@ -30,12 +30,6 @@ export default React.createClass({
         Array.prototype.map.call(links, (item) => {
             item.target = "_blank";
         });
-        FontService.getFont('苹果设计天才艾维设计的零售店是这个样子的').then((res) => {
-            var newFontStyle = document.createElement('style');
-            newFontStyle.type = 'text/css';
-            newFontStyle.textContent = res;
-            document.head.appendChild(newFontStyle);
-        });
     },
 
     render() {
