@@ -18,6 +18,7 @@ from django.contrib import admin
 import api.views
 import web.views
 import log.views
+from web.sitemaps import WebSitemap
 
 urlpatterns = [
     url(r'^gever/admin/', include(admin.site.urls)),
@@ -38,4 +39,12 @@ urlpatterns += [
 
 urlpatterns += [
     url(r'^log/log/$', log.views.log),
+]
+
+sitemaps = {
+    'web': WebSitemap,
+}
+urlpatterns += [
+    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+    url(r'^robots.txt$', include('robots.urls')),
 ]

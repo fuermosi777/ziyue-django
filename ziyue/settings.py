@@ -26,8 +26,10 @@ SECRET_KEY = 'ul@vi$!-cv+(%0c@@_c2j+!5bv-38#y)sh!o6!=b=1o1mnghlp'
 try:
     import local
     DEBUG = True
+    SITE_ID = 3
 except:
     DEBUG = False
+    SITE_ID = 2
 
 if not DEBUG:
     CACHE_BACKEND = 'memcached://127.0.0.1:30145/?timeout=900'
@@ -63,6 +65,9 @@ INSTALLED_APPS = (
     'storages',
     'imagekit',
     'corsheaders',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+    'robots',
 )
 
 MIDDLEWARE_CLASSES = (
