@@ -33,7 +33,11 @@ def post(request, post_id):
         post_id = encrypter.decode(post_id)
     except:
         return HttpResponse(status=404)
-    post_instance = Post.objects.get(id=post_id)
+    try:
+        post_instance = Post.objects.get(id=post_id)
+    except:
+        post_instance = None
+        return HttpResponseRedirect('/')
     context = {
         'post': post_instance
     }
