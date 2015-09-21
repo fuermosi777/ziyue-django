@@ -37,6 +37,7 @@ def extract_images(vendor, post):
     soup = BS(post.body)
     for img in soup.findAll('img'):
         img_src = url_add_pre(vendor.url, img['src'])
+        img['src'] = img_src
         img['src'] = store_post_image_from_url(vendor, img_src, post)
     return unicode(soup)
 
@@ -51,6 +52,7 @@ def store_post_image_from_url(vendor, image_url, post):
         'referer': vendor.url,
     }
     if urlparse(image_url).scheme == 'data':
+        print image_url
         return image_url
     else:
         ext = mimetypes.guess_extension(mimetypes.guess_type(image_url)[0])
@@ -62,6 +64,7 @@ def store_post_image_from_url(vendor, image_url, post):
         p = Post_image(post=post)
         p.image.save('%s%s'%(uuid.uuid4(), ext), File(img_temp))
         p.save()
+        print p.image.url
         return p.image.url
 
 def filter_list(list):

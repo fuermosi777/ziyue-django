@@ -6,7 +6,6 @@ export default {
         body = body.replace(/[^>]align=".*?"/g, '');
         body = body.replace(/<style>(.|[\r\n])*?<\/style>/g, '');
         body = body.replace(/<p>(\s|&nbsp;)*?<\/p>/g, '');
-        console.log(body);
         body = body.replace(/<p>(<br>|<br\/>)<\/p>/g, '');
 
         // remove <p><br></p>p> || <section><br></section>section>
