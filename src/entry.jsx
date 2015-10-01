@@ -2,7 +2,7 @@ import React from 'react';
 import Router from 'react-router';  
 import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 import AttachFastClick from 'fastclick';
-require('babel-runtime/core-js/promise')
+//require('babel-runtime/core-js/promise')
 import HomePage from './pages/HomePage.jsx';
 
 let App = React.createClass({  

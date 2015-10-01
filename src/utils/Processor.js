@@ -7,7 +7,6 @@ export default {
         body = body.replace(/<style>(.|[\r\n])*?<\/style>/g, '');
         body = body.replace(/<p>(\s|&nbsp;)*?<\/p>/g, '');
         body = body.replace(/<p>(<br>|<br\/>)<\/p>/g, '');
-
         // remove <p><br></p>p> || <section><br></section>section>
         /*
         doc.find('p').each((idx, val) => {
